@@ -1,1 +1,38 @@
 @import "tailwindcss";
+
+/* Nombre "Brigitech" con el estilo del logo */
+.wordmark {
+  font-family: "Exo 2", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  /* Inclinación extra sobre la cursiva, el logo va más tumbado */
+  display: inline-block;
+  transform: skewX(-6deg);
+  /* Borde oscuro pegado a las letras y brillo azul alrededor, como en el logo */
+  filter: drop-shadow(0 0 1px #000) drop-shadow(0 2px 0 #0b1220)
+    drop-shadow(0 0 10px rgb(30 144 255 / 0.45));
+}
+
+/* Degradado vertical: el texto toma el color del fondo recortado */
+.wordmark-brigi,
+.wordmark-tech {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  /* Espacio extra para que la cursiva no corte la última letra */
+  padding-right: 0.08em;
+}
+
+/* "Brigi": blanco que baja a gris claro.
+   El margen negativo compensa el padding para que no quede espacio antes de "tech" */
+.wordmark-brigi {
+  margin-right: -0.08em;
+  background-image: linear-gradient(180deg, #ffffff 30%, #c7ccd6 100%);
+}
+
+/* "tech": azul claro que baja a azul intenso */
+.wordmark-tech {
+  background-image: linear-gradient(180deg, #4cc2ff 0%, #1e8fff 55%, #1560e6 100%);
+}

@@ -18,6 +18,10 @@ const { title, description } = Astro.props;
     <!-- Descripción que aparece en Google -->
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" />
+    <!-- Fuente Exo 2 (gruesa y en cursiva), la más parecida a la del logo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,900&display=swap" rel="stylesheet" />
     <title>{title}</title>
   </head>
   <body class="bg-slate-950 text-slate-100 antialiased">

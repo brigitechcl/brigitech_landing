@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import logo from "../assets/logo-brigitech.webp";
+
 // Textos aquí arriba para cambiarlos fácil sin tocar el HTML
 const titulo = "Desarrollamos el software que tu negocio necesita";
 const subtitulo =
@@ -6,7 +9,17 @@ const subtitulo =
 const textoBoton = "Hablemos";
 const textoBotonSecundario = "Ver servicios";
 ---
-<section id="contenido" class="mx-auto max-w-5xl px-6 py-28 text-center">
+<section id="contenido" class="mx-auto max-w-5xl px-6 pt-16 pb-28 text-center">
+  <!-- loading="eager": el logo se ve apenas abre la página, no se carga diferido.
+       mix-blend-lighten funde el fondo negro del logo con el fondo de la página -->
+  <Image
+    src={logo}
+    alt="Logo de Brigitech"
+    width={288}
+    height={288}
+    loading="eager"
+    class="mx-auto mb-8 w-56 mix-blend-lighten sm:w-72"
+  />
   <h1 class="text-4xl font-bold tracking-tight sm:text-6xl">
     {titulo}
   </h1>
