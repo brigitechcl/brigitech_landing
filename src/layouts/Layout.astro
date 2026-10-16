@@ -1,0 +1,23 @@
+---
+// Props que recibe el layout desde cada página
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Descripción que aparece en Google -->
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-slate-950 text-slate-100 antialiased">
+    <!-- Aquí se inserta el contenido de cada página -->
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,21 @@
+---
+// Textos aquí arriba para cambiarlos fácil sin tocar el HTML
+const titulo = "Tecnología que impulsa tu negocio";
+const subtitulo = "En Brigitech desarrollamos soluciones a tu medida.";
+const textoBoton = "Hablemos";
+---
+<section class="mx-auto max-w-5xl px-6 py-28 text-center">
+  <h1 class="text-4xl font-bold tracking-tight sm:text-6xl">
+    {titulo}
+  </h1>
+  <p class="mt-6 text-lg text-slate-300">
+    {subtitulo}
+  </p>
+  <!-- El href="#contacto" baja hasta la sección de contacto -->
+  <a
+    href="#contacto"
+    class="mt-10 inline-block rounded-lg bg-cyan-500 px-8 py-3 font-semibold text-slate-950 transition hover:bg-cyan-400"
+  >
+    {textoBoton}
+  </a>
+</section>

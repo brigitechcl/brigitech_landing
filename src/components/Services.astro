@@ -1,0 +1,19 @@
+---
+// Para agregar un servicio, solo añade un objeto a esta lista
+const servicios = [
+  { nombre: "Desarrollo web", detalle: "Sitios y aplicaciones modernas." },
+  { nombre: "Software a medida", detalle: "Sistemas hechos para tu operación." },
+  { nombre: "Soporte técnico", detalle: "Acompañamiento cuando lo necesites." },
+];
+---
+<section class="mx-auto max-w-5xl px-6 py-20">
+  <h2 class="mb-12 text-center text-3xl font-bold">Servicios</h2>
+  <div class="grid gap-6 sm:grid-cols-3">
+    {servicios.map((s) => (
+      <div class="rounded-xl border border-slate-800 bg-slate-900 p-6">
+        <h3 class="text-xl font-semibold text-cyan-400">{s.nombre}</h3>
+        <p class="mt-2 text-slate-300">{s.detalle}</p>
+      </div>
+    ))}
+  </div>
+</section>
