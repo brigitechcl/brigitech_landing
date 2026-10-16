@@ -1,0 +1,31 @@
+---
+// Enlaces del menú: cada href apunta al id de una sección
+const enlaces = [
+  { texto: "Servicios", href: "#servicios" },
+  { texto: "Rubros", href: "#rubros" },
+  { texto: "Cómo trabajamos", href: "#proceso" },
+  { texto: "Preguntas", href: "#preguntas" },
+];
+---
+<header class="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/80 backdrop-blur">
+  <!-- Enlace oculto para saltar el menú con teclado -->
+  <a href="#contenido" class="sr-only focus:not-sr-only focus:absolute focus:p-2">
+    Saltar al contenido
+  </a>
+  <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+    <a href="#" class="text-xl font-bold">
+      Brigi<span class="text-cyan-400">tech</span>
+    </a>
+    <ul class="hidden gap-6 text-sm text-slate-300 md:flex">
+      {enlaces.map((e) => (
+        <li><a href={e.href} class="transition hover:text-cyan-400">{e.texto}</a></li>
+      ))}
+    </ul>
+    <a
+      href="#contacto"
+      class="rounded-lg bg-cyan-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400"
+    >
+      Conversemos
+    </a>
+  </nav>
+</header>

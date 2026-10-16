@@ -1,0 +1,15 @@
+---
+// El año se actualiza solo
+const anio = new Date().getFullYear();
+---
+<footer class="border-t border-slate-800">
+  <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-slate-400 sm:flex-row">
+    <span class="font-bold text-slate-100">Brigi<span class="text-cyan-400">tech</span></span>
+    <nav class="flex gap-6">
+      <a href="#servicios" class="hover:text-cyan-400">Servicios</a>
+      <a href="#proceso" class="hover:text-cyan-400">Cómo trabajamos</a>
+      <a href="#contacto" class="hover:text-cyan-400">Contacto</a>
+    </nav>
+    <span>© {anio} Brigitech. Todos los derechos reservados.</span>
+  </div>
+</footer>

@@ -1,0 +1,35 @@
+---
+// Etapas del proyecto, en orden
+const pasos = [
+  {
+    titulo: "Conversamos",
+    detalle: "Nos cuentas tu problema y entendemos tu negocio, sin compromiso.",
+  },
+  {
+    titulo: "Proponemos",
+    detalle: "Definimos alcance, plazos y costo en una propuesta clara.",
+  },
+  {
+    titulo: "Desarrollamos",
+    detalle: "Construimos por etapas y te mostramos avances funcionando.",
+  },
+  {
+    titulo: "Entregamos y acompañamos",
+    detalle: "Ponemos el sistema en marcha y seguimos contigo después.",
+  },
+];
+---
+<section id="proceso" class="mx-auto max-w-5xl px-6 py-20">
+  <h2 class="mb-12 text-center text-3xl font-bold">Cómo trabajamos</h2>
+  <ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {pasos.map((p, i) => (
+      <li class="rounded-xl border border-slate-800 p-6">
+        <span class="flex h-10 w-10 items-center justify-center rounded-full bg-cyan-500 font-bold text-slate-950">
+          {i + 1}
+        </span>
+        <h3 class="mt-4 text-lg font-semibold">{p.titulo}</h3>
+        <p class="mt-2 text-slate-300">{p.detalle}</p>
+      </li>
+    ))}
+  </ol>
+</section>

@@ -1,0 +1,43 @@
+---
+// Preguntas frecuentes: cada objeto es una pregunta con su respuesta
+const preguntas = [
+  {
+    pregunta: "¿Cuánto cuesta desarrollar un sistema?",
+    respuesta:
+      "Depende del alcance. Después de una primera conversación te enviamos una propuesta con costo y plazos cerrados.",
+  },
+  {
+    pregunta: "¿Cuánto se demora un proyecto?",
+    respuesta:
+      "Un sitio web puede estar listo en pocas semanas; un sistema a medida suele tomar de uno a varios meses, entregado por etapas.",
+  },
+  {
+    pregunta: "¿El código y los datos son míos?",
+    respuesta: "Sí. Al terminar el proyecto te entregamos el código fuente y el acceso a todos tus datos.",
+  },
+  {
+    pregunta: "¿Pueden integrarse con sistemas que ya uso?",
+    respuesta:
+      "Sí. Conectamos con plataformas de pago, facturación electrónica, ERPs y otras herramientas mediante APIs.",
+  },
+  {
+    pregunta: "¿Qué pasa después de la entrega?",
+    respuesta: "Ofrecemos planes de mantenimiento para corregir, mejorar y hacer crecer tu software.",
+  },
+];
+---
+<section id="preguntas" class="mx-auto max-w-3xl px-6 py-20">
+  <h2 class="mb-10 text-center text-3xl font-bold">Preguntas frecuentes</h2>
+  <!-- <details> abre y cierra cada respuesta sin JavaScript -->
+  <div class="space-y-4">
+    {preguntas.map((p) => (
+      <details class="group rounded-xl border border-slate-800 bg-slate-900 p-5">
+        <summary class="flex cursor-pointer list-none items-center justify-between font-semibold">
+          {p.pregunta}
+          <span class="text-cyan-400 transition group-open:rotate-45">+</span>
+        </summary>
+        <p class="mt-3 text-slate-300">{p.respuesta}</p>
+      </details>
+    ))}
+  </div>
+</section>

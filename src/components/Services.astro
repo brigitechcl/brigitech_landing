@@ -1,17 +1,39 @@
 ---
 // Para agregar un servicio, solo añade un objeto a esta lista
 const servicios = [
-  { nombre: "Desarrollo web", detalle: "Sitios y aplicaciones modernas." },
-  { nombre: "Software a medida", detalle: "Sistemas hechos para tu operación." },
-  { nombre: "Soporte técnico", detalle: "Acompañamiento cuando lo necesites." },
+  {
+    nombre: "Desarrollo web",
+    detalle: "Sitios y aplicaciones web rápidas, seguras y fáciles de administrar.",
+  },
+  {
+    nombre: "Software a medida",
+    detalle: "Sistemas internos que se adaptan a tus procesos, no al revés.",
+  },
+  {
+    nombre: "Apps móviles",
+    detalle: "Aplicaciones para Android e iOS conectadas a tu operación.",
+  },
+  {
+    nombre: "Integraciones y APIs",
+    detalle: "Conectamos tus sistemas con pagos, facturación y otras plataformas.",
+  },
+  {
+    nombre: "Ecommerce",
+    detalle: "Tiendas online conectadas a tu inventario y medios de pago.",
+  },
+  {
+    nombre: "Mantenimiento y evolución",
+    detalle: "Mejoras continuas, monitoreo y soporte para tu software.",
+  },
 ];
 ---
-<section class="mx-auto max-w-5xl px-6 py-20">
+<section id="servicios" class="mx-auto max-w-5xl px-6 py-20">
   <h2 class="mb-12 text-center text-3xl font-bold">Servicios</h2>
-  <div class="grid gap-6 sm:grid-cols-3">
-    {servicios.map((s) => (
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {servicios.map((s, i) => (
       <div class="rounded-xl border border-slate-800 bg-slate-900 p-6">
-        <h3 class="text-xl font-semibold text-cyan-400">{s.nombre}</h3>
+        <span class="text-sm font-mono text-slate-500">{String(i + 1).padStart(2, "0")}</span>
+        <h3 class="mt-2 text-xl font-semibold text-cyan-400">{s.nombre}</h3>
         <p class="mt-2 text-slate-300">{s.detalle}</p>
       </div>
     ))}

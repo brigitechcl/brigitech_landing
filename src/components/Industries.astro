@@ -1,0 +1,24 @@
+---
+// Rubros a los que apuntamos: cambia o agrega según tus clientes
+const rubros = [
+  "Comercio y retail",
+  "Distribuidoras",
+  "Servicios profesionales",
+  "Logística",
+  "Educación",
+  "Emprendimientos",
+];
+---
+<section id="rubros" class="border-y border-slate-800 bg-slate-900/50">
+  <div class="mx-auto max-w-5xl px-6 py-20 text-center">
+    <h2 class="text-3xl font-bold">Para todo tipo de negocio</h2>
+    <p class="mx-auto mt-4 max-w-2xl text-slate-300">
+      Entendemos primero cómo funciona tu operación y después escribimos el código.
+    </p>
+    <ul class="mt-10 flex flex-wrap justify-center gap-3">
+      {rubros.map((r) => (
+        <li class="rounded-full border border-slate-700 px-5 py-2 text-slate-200">{r}</li>
+      ))}
+    </ul>
+  </div>
+</section>

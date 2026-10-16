@@ -3,10 +3,65 @@
 const correo = "contacto@brigitech.com";
 ---
 <!-- id="contacto" es el destino del botón del Hero -->
-<section id="contacto" class="mx-auto max-w-5xl px-6 py-20 text-center">
-  <h2 class="text-3xl font-bold">Contáctanos</h2>
-  <p class="mt-4 text-slate-300">Cuéntanos tu proyecto por favor.</p>
-  <a href={`mailto:${correo}`} class="mt-6 inline-block text-cyan-400 underline">
-    {correo}
-  </a>
+<section id="contacto" class="mx-auto max-w-3xl px-6 py-20">
+  <h2 class="text-center text-3xl font-bold">Contáctanos</h2>
+  <p class="mt-4 text-center text-slate-300">
+    Cuéntanos tu proyecto y te respondemos a la brevedad.
+  </p>
+
+  <!-- El formulario no envía datos a un servidor: arma un correo y lo abre en tu programa de email -->
+  <form id="form-contacto" data-correo={correo} class="mt-10 grid gap-4 sm:grid-cols-2">
+    <label class="grid gap-2 text-sm">
+      Nombre
+      <input name="nombre" required class="rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-base" />
+    </label>
+    <label class="grid gap-2 text-sm">
+      Empresa
+      <input name="empresa" class="rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-base" />
+    </label>
+    <label class="grid gap-2 text-sm sm:col-span-2">
+      ¿Qué necesitas?
+      <select name="servicio" class="rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-base">
+        <option>Desarrollo web</option>
+        <option>Software a medida</option>
+        <option>App móvil</option>
+        <option>Integraciones y APIs</option>
+        <option>Ecommerce</option>
+        <option>Otro</option>
+      </select>
+    </label>
+    <label class="grid gap-2 text-sm sm:col-span-2">
+      Cuéntanos más
+      <textarea name="mensaje" rows="4" class="rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-base"></textarea>
+    </label>
+    <button
+      type="submit"
+      class="rounded-lg bg-cyan-500 px-8 py-3 font-semibold text-slate-950 transition hover:bg-cyan-400 sm:col-span-2"
+    >
+      Enviar
+    </button>
+  </form>
+
+  <p class="mt-6 text-center text-sm text-slate-400">
+    O escríbenos directo a{" "}
+    <a href={`mailto:${correo}`} class="text-cyan-400 underline">{correo}</a>
+  </p>
 </section>
+
+<script>
+  // Al enviar, arma el asunto y el cuerpo del correo con lo que escribió la persona
+  const form = document.getElementById("form-contacto") as HTMLFormElement;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const datos = new FormData(form);
+    const asunto = `Proyecto: ${datos.get("servicio")}`;
+    const cuerpo = [
+      `Nombre: ${datos.get("nombre")}`,
+      `Empresa: ${datos.get("empresa")}`,
+      "",
+      `${datos.get("mensaje")}`,
+    ].join("\n");
+    window.location.href =
+      `mailto:${form.dataset.correo}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+  });
+</script>

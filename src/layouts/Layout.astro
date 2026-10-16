@@ -10,7 +10,8 @@ interface Props {
 const { title, description } = Astro.props;
 ---
 <!doctype html>
-<html lang="es">
+<!-- scroll-pt-20 evita que el menú fijo tape el título al saltar a una sección -->
+<html lang="es" class="scroll-smooth scroll-pt-20">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
