@@ -12,9 +12,9 @@ const enlaces = [
   <a href="#contenido" class="sr-only focus:not-sr-only focus:absolute focus:p-2">
     Saltar al contenido
   </a>
-  <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+  <nav class="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 py-4 sm:px-6">
     <!-- Nombre con el estilo del logo: letra gruesa en cursiva, "Brigi" blanco y "tech" azul -->
-    <a href="#" class="wordmark text-3xl">
+    <a href="#" class="wordmark text-2xl sm:text-3xl">
       <span class="wordmark-brigi">Brigi</span><span class="wordmark-tech">tech</span>
     </a>
     <ul class="hidden gap-6 text-sm text-slate-300 md:flex">
@@ -22,11 +22,52 @@ const enlaces = [
         <li><a href={e.href} class="transition hover:text-cyan-400">{e.texto}</a></li>
       ))}
     </ul>
-    <a
-      href="#contacto"
-      class="rounded-lg bg-cyan-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400"
-    >
-      Conversemos
-    </a>
+    <div class="flex items-center gap-2 sm:gap-3">
+      <a
+        href="#contacto"
+        class="rounded-lg bg-cyan-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400"
+      >
+        Conversemos
+      </a>
+      <!-- Botón ☰ que abre el menú en celulares (en pantallas grandes se oculta) -->
+      <button
+        id="boton-menu"
+        type="button"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="menu-movil"
+        class="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700 md:hidden"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+    </div>
   </nav>
+
+  <!-- Menú desplegable para celulares -->
+  <ul id="menu-movil" hidden class="border-t border-slate-800 px-6 py-2 md:hidden">
+    {enlaces.map((e) => (
+      <li>
+        <a href={e.href} class="block py-3 text-slate-300 transition hover:text-cyan-400">{e.texto}</a>
+      </li>
+    ))}
+  </ul>
 </header>
+
+<script>
+  // Abre y cierra el menú del celular; al elegir una sección se cierra solo
+  const boton = document.getElementById("boton-menu") as HTMLButtonElement;
+  const menu = document.getElementById("menu-movil") as HTMLUListElement;
+
+  function mostrarMenu(abierto: boolean) {
+    menu.hidden = !abierto;
+    boton.setAttribute("aria-expanded", String(abierto));
+    boton.setAttribute("aria-label", abierto ? "Cerrar menú" : "Abrir menú");
+  }
+
+  boton.addEventListener("click", () => mostrarMenu(menu.hidden));
+  menu.addEventListener("click", (e) => {
+    if ((e.target as HTMLElement).closest("a")) mostrarMenu(false);
+  });
+</script>
