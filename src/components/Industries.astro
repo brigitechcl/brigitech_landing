@@ -1,24 +1,54 @@
 ---
-// Rubros a los que apuntamos: cambia o agrega según tus clientes
+import Icon from "./Icon.astro";
 const rubros = [
-  "Comercio y retail",
-  "Distribuidoras",
-  "Servicios profesionales",
-  "Logística",
-  "Educación",
-  "Emprendimientos",
+  { nombre: "Comercio y retail", descripcion: "Inventario, ventas y ecommerce en sintonía." },
+  { nombre: "Distribución y logística", descripcion: "Pedidos, rutas y operación bajo control." },
+  { nombre: "Servicios profesionales", descripcion: "Menos administración. Más foco en tus clientes." },
+  { nombre: "Educación", descripcion: "Experiencias que conectan personas y aprendizaje." },
+  { nombre: "Emprendimientos", descripcion: "De una buena idea a tu primer producto digital." },
 ];
 ---
-<section id="rubros" class="border-y border-slate-800 bg-slate-900/50">
-  <div class="mx-auto max-w-5xl px-6 py-20 text-center">
-    <h2 class="text-3xl font-bold">Para todo tipo de negocio</h2>
-    <p class="mx-auto mt-4 max-w-2xl text-slate-300">
-      Entendemos primero cómo funciona tu operación y después escribimos el código.
-    </p>
-    <ul class="mt-10 flex flex-wrap justify-center gap-3">
-      {rubros.map((r) => (
-        <li class="rounded-full border border-slate-700 px-5 py-2 text-slate-200">{r}</li>
+<section id="rubros" class="industries section" aria-labelledby="industries-title">
+  <div class="container industries-layout">
+    <div class="industries-intro">
+      <p class="eyebrow">Tu contexto importa</p>
+      <h2 id="industries-title" class="section-title">Primero entendemos<br />tu negocio.<br /><span>Después, el código.</span></h2>
+      <p class="section-copy">No necesitas saber de tecnología para dar el siguiente paso. Necesitas un equipo que entienda dónde estás y a dónde quieres llegar.</p>
+      <a href="#contacto" class="text-link">Encontrar mi solución <Icon name="arrow-up" size={18} /></a>
+      <span class="intro-footnote">DISTINTOS RUBROS. LA MISMA ATENCIÓN AL DETALLE.</span>
+    </div>
+    <div class="industry-list">
+      {rubros.map((r, i) => (
+        <div class="industry-row"><span class="industry-number">0{i + 1}</span><div><h3>{r.nombre}</h3><p>{r.descripcion}</p></div><span class="industry-mark"><Icon name="check" size={17} /></span></div>
       ))}
-    </ul>
+      <p class="industry-note">¿Tu rubro no está aquí? <a href="#contacto">Conversemos igual <Icon name="arrow" size={14} /></a></p>
+    </div>
   </div>
 </section>
+
+<style>
+  .industries { background: #eaf0f5; color: #101f31; position: relative; }
+  .industries-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; }
+  .eyebrow { color: #1768b9; }
+  .section-title { margin-top: 1.3rem; }
+  .section-title > span { color: #6c8297; }
+  .section-copy { color: #566c80; margin-top: 1.5rem; max-width: 24rem; font-size: .9rem; }
+  .text-link { color: #1464ae; margin-top: 1.7rem; }
+  .text-link:hover { color: #102c48; }
+  .intro-footnote { display: block; color: #536a7f; font: .54rem monospace; letter-spacing: .07em; margin-top: 3.5rem; }
+  .industry-row { display: flex; align-items: center; gap: 1.5rem; padding-block: 1.6rem; border-bottom: 1px solid #122e451c; }
+  .industry-row:first-child { border-top: 1px solid #122e451c; }
+  .industry-number { color: #536a7f; font: .6rem monospace; }
+  h3 { font-size: 1.05rem; font-weight: 600; letter-spacing: -.03em; }
+  .industry-row p { color: #536a7f; font-size: .875rem; line-height: 1.7; margin-top: .4rem; }
+  .industry-mark { margin-left: auto; color: #527a9d; }
+  .industry-note { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; color: #536a7f; font-size: .78rem; }
+  .industry-note a { display: inline-flex; align-items: center; gap: .35rem; color: #1464ae; font-weight: 500; }
+  @media (max-width: 1023px) { .industries-layout { gap: 3rem; } }
+  @media (max-width: 767px) {
+    .industries-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    .intro-footnote { margin-top: 2rem; font-size: .49rem; }
+    .industry-row { gap: 1rem; padding-block: 1.3rem; }
+    .section-copy { max-width: 32rem; }
+  }
+</style>

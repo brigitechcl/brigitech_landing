@@ -1,35 +1,43 @@
 ---
-// Etapas del proyecto, en orden
+import Icon from "./Icon.astro";
 const pasos = [
-  {
-    titulo: "Conversamos",
-    detalle: "Nos cuentas tu problema y entendemos tu negocio, sin compromiso.",
-  },
-  {
-    titulo: "Proponemos",
-    detalle: "Definimos alcance, plazos y costo en una propuesta clara.",
-  },
-  {
-    titulo: "Desarrollamos",
-    detalle: "Construimos por etapas y te mostramos avances funcionando.",
-  },
-  {
-    titulo: "Entregamos y acompañamos",
-    detalle: "Ponemos el sistema en marcha y seguimos contigo después.",
-  },
+  { titulo: "Escuchamos", detalle: "Conocemos tu operación, tus desafíos y lo que quieres lograr. La solución empieza con las preguntas correctas.", entrega: "Diagnóstico y objetivos" },
+  { titulo: "Trazamos el plan", detalle: "Aterrizamos la idea en una propuesta concreta: qué construiremos, cómo lo haremos y cuánto costará.", entrega: "Alcance, plazos y presupuesto" },
+  { titulo: "Construimos contigo", detalle: "Desarrollamos por etapas. Ves avances reales, pruebas lo que funciona y participas en las decisiones.", entrega: "Entregas y validación" },
+  { titulo: "Lanzamos y seguimos", detalle: "Ponemos todo en marcha, te entregamos el código y acompañamos la evolución de tu plataforma.", entrega: "Lanzamiento y continuidad" },
 ];
 ---
-<section id="proceso" class="mx-auto max-w-5xl px-6 py-20">
-  <h2 class="mb-12 text-center text-3xl font-bold">Cómo trabajamos</h2>
-  <ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+<section id="proceso" class="section container" aria-labelledby="process-title">
+  <div class="section-heading"><div><p class="eyebrow">Una forma clara de avanzar</p><h2 id="process-title" class="section-title">Sin cajas negras.<br />Sin sorpresas.</h2></div><p class="section-copy">Un proceso cercano y transparente. Sabes en qué estamos, qué viene después y por qué tomamos cada decisión.</p></div>
+  <ol class="process-grid">
     {pasos.map((p, i) => (
-      <li class="rounded-xl border border-slate-800 p-6">
-        <span class="flex h-10 w-10 items-center justify-center rounded-full bg-cyan-500 font-bold text-slate-950">
-          {i + 1}
-        </span>
-        <h3 class="mt-4 text-lg font-semibold">{p.titulo}</h3>
-        <p class="mt-2 text-slate-300">{p.detalle}</p>
-      </li>
+      <li><div class="step-line"><span class="step-number">0{i + 1}</span><span class="step-connector"></span><Icon name="arrow" size={15} /></div><h3>{p.titulo}</h3><p>{p.detalle}</p><span class="step-delivery">{p.entrega}</span></li>
     ))}
   </ol>
+  <div class="ownership"><span class="ownership-icon"><Icon name="code" size={26} /></span><div><h3>Tu proyecto. Tu código. Tu control.</h3><p>Lo que construimos para ti, es tuyo. Código fuente y acceso a tus datos, sin dependencias innecesarias.</p></div><span class="ownership-label"><Icon name="check" size={15} /> Así trabajamos</span></div>
 </section>
+
+<style>
+  .process-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; list-style: none; padding: 0; margin: 3.5rem 0 0; }
+  .step-line { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.7rem; }
+  .step-number { font: .75rem monospace; color: var(--cyan); }
+  .step-connector { height: 1px; flex: 1; background: #ffffff15; }
+  .step-line :global(svg) { color: #45607c; }
+  .process-grid h3 { font-size: 1.13rem; font-weight: 500; letter-spacing: -.035em; }
+  .process-grid p { color: var(--muted); font-size: .875rem; line-height: 1.85; margin-top: 1rem; }
+  .step-delivery { display: block; font: .55rem monospace; color: #69839f; margin-top: 1.5rem; }
+  .ownership { display: flex; align-items: center; gap: 1.5rem; background: linear-gradient(100deg, #0b1726, #0b131e); border: 1px solid #168cff22; border-radius: .65rem; padding: 1.8rem 2rem; margin-top: 4rem; }
+  .ownership-icon { display: grid; place-items: center; width: 52px; height: 52px; flex-shrink: 0; color: #4eb5ff; border: 1px solid #168cff30; border-radius: .6rem; background: #168cff0d; }
+  .ownership h3 { font-size: 1.1rem; font-weight: 500; letter-spacing: -.03em; }
+  .ownership p { margin-top: .4rem; color: var(--muted); font-size: .85rem; line-height: 1.8; max-width: 38rem; }
+  .ownership-label { display: inline-flex; gap: .45rem; align-items: center; margin-left: auto; font-size: .67rem; white-space: nowrap; color: #7aa1c7; }
+  @media (max-width: 1023px) { .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; } .ownership-label { display: none; } }
+  @media (max-width: 639px) {
+    .process-grid { grid-template-columns: 1fr; gap: 2rem; margin-top: 2.5rem; }
+    .step-line { margin-bottom: 1rem; }
+    .step-delivery { margin-top: .8rem; }
+    .ownership { align-items: start; padding: 1.3rem; gap: 1rem; margin-top: 2.5rem; }
+    .ownership-icon { width: 38px; height: 38px; }
+    .ownership h3 { font-size: 1rem; }
+  }
+</style>

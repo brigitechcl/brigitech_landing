@@ -1,43 +1,40 @@
 ---
-// Preguntas frecuentes: cada objeto es una pregunta con su respuesta
+import Icon from "./Icon.astro";
 const preguntas = [
-  {
-    pregunta: "¿Cuánto cuesta desarrollar un sistema?",
-    respuesta:
-      "Depende del alcance. Después de una primera conversación te enviamos una propuesta con costo y plazos cerrados.",
-  },
-  {
-    pregunta: "¿Cuánto se demora un proyecto?",
-    respuesta:
-      "Un sitio web puede estar listo en pocas semanas; un sistema a medida suele tomar de uno a varios meses, entregado por etapas.",
-  },
-  {
-    pregunta: "¿El código y los datos son míos?",
-    respuesta: "Sí. Al terminar el proyecto te entregamos el código fuente y el acceso a todos tus datos.",
-  },
-  {
-    pregunta: "¿Pueden integrarse con sistemas que ya uso?",
-    respuesta:
-      "Sí. Conectamos con plataformas de pago, facturación electrónica, ERPs y otras herramientas mediante APIs.",
-  },
-  {
-    pregunta: "¿Qué pasa después de la entrega?",
-    respuesta: "Ofrecemos planes de mantenimiento para corregir, mejorar y hacer crecer tu software.",
-  },
+  { pregunta: "¿Cuánto cuesta desarrollar un sistema?", respuesta: "Depende del alcance y de las integraciones que necesites. Después de una primera conversación, te enviamos una propuesta con costo, plazos y entregables definidos. Así puedes decidir con toda la información." },
+  { pregunta: "¿Cuánto se demora un proyecto?", respuesta: "Un sitio web puede estar listo en pocas semanas; un sistema a medida suele tomar de uno a varios meses. Definimos los plazos antes de comenzar y trabajamos por etapas para que puedas ver avances durante el desarrollo." },
+  { pregunta: "¿Necesito tener clara toda la idea?", respuesta: "No. Podemos empezar por el problema que quieres resolver. Te ayudamos a ordenar las necesidades, priorizar lo importante y definir una primera versión que tenga sentido para tu negocio." },
+  { pregunta: "¿El código y los datos son míos?", respuesta: "Sí. Al terminar el proyecto te entregamos el código fuente y el acceso a todos tus datos. Tu negocio mantiene el control sobre lo que construimos." },
+  { pregunta: "¿Pueden conectar los sistemas que ya uso?", respuesta: "Sí. Integramos plataformas de pago, facturación electrónica, ERPs y otras herramientas mediante sus APIs. Primero revisamos las posibilidades de cada plataforma para proponerte una integración viable." },
+  { pregunta: "¿Qué pasa después del lanzamiento?", respuesta: "Podemos acompañarte con mantenimiento, soporte y nuevas funcionalidades. Definimos juntos qué nivel de continuidad necesita tu plataforma para seguir funcionando y creciendo." },
 ];
 ---
-<section id="preguntas" class="mx-auto max-w-3xl px-6 py-20">
-  <h2 class="mb-10 text-center text-3xl font-bold">Preguntas frecuentes</h2>
-  <!-- <details> abre y cierra cada respuesta sin JavaScript -->
-  <div class="space-y-4">
-    {preguntas.map((p) => (
-      <details class="group rounded-xl border border-slate-800 bg-slate-900 p-5">
-        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">
-          {p.pregunta}
-          <span class="shrink-0 text-xl text-cyan-400 transition group-open:rotate-45">+</span>
-        </summary>
-        <p class="mt-3 text-slate-300">{p.respuesta}</p>
-      </details>
-    ))}
+<section id="preguntas" class="faq-section section" aria-labelledby="faq-title">
+  <div class="container faq-layout">
+    <div class="faq-intro"><p class="eyebrow">Antes de empezar</p><h2 id="faq-title" class="section-title">Buenas preguntas.<br />Respuestas claras.</h2><p class="section-copy">Elegir un equipo de desarrollo es una decisión importante. Queremos que la tomes con confianza.</p><a href="#contacto" class="text-link">Tengo otra pregunta <Icon name="arrow-up" size={17} /></a></div>
+    <div class="faq-list">
+      {preguntas.map((p, i) => (
+        <details name="preguntas-brigitech"><summary><span class="faq-number">0{i + 1}</span><span>{p.pregunta}</span><span class="faq-plus"><Icon name="plus" size={18} /></span></summary><div class="faq-answer"><p>{p.respuesta}</p></div></details>
+      ))}
+    </div>
   </div>
 </section>
+
+<style>
+  .faq-section { border-top: 1px solid var(--line); background: #080f18; }
+  .faq-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; }
+  .section-title { margin-top: 1.3rem; font-size: clamp(2.1rem, 3.5vw, 3rem); }
+  .section-copy { margin-top: 1.5rem; max-width: 21rem; font-size: .9rem; }
+  .text-link { margin-top: 1.8rem; color: #7bc7ff; }
+  details { border-bottom: 1px solid #ffffff12; }
+  details:first-child { border-top: 1px solid #ffffff12; }
+  summary { display: flex; align-items: center; gap: 1rem; list-style: none; padding: 1.5rem 0; font-size: .88rem; line-height: 1.6; }
+  summary::-webkit-details-marker { display: none; }
+  .faq-number { font: .55rem monospace; color: #7890ab; }
+  .faq-plus { display: inline-flex; margin-left: auto; color: #6893b8; transition: transform .2s; }
+  details[open] .faq-plus { transform: rotate(45deg); color: var(--cyan); }
+  details[open] summary { color: #8dd7ff; }
+  .faq-answer { padding: 0 2rem 1.5rem; color: var(--muted); font-size: .9rem; line-height: 1.85; }
+  @media (max-width: 1023px) { .faq-layout { gap: 3rem; } }
+  @media (max-width: 767px) { .faq-layout { grid-template-columns: 1fr; gap: 2.5rem; } .section-copy { max-width: 30rem; } summary { font-size: .82rem; gap: .75rem; } .faq-answer { padding-inline: 1.5rem; } }
+</style>

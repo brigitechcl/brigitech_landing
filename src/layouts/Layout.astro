@@ -10,21 +10,24 @@ interface Props {
 const { title, description } = Astro.props;
 ---
 <!doctype html>
-<!-- scroll-pt-20 evita que el menú fijo tape el título al saltar a una sección -->
-<html lang="es" class="scroll-smooth scroll-pt-20">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Descripción que aparece en Google -->
     <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CL" />
     <link rel="icon" href="/favicon.svg" />
-    <!-- Fuente Exo 2 (gruesa y en cursiva), la más parecida a la del logo -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600;700&family=Manrope:wght@400;500;600;650;700;800&display=swap" rel="stylesheet" />
+    <meta name="theme-color" content="#060b12" />
     <title>{title}</title>
   </head>
-  <body class="bg-slate-950 text-slate-100 antialiased">
+  <body>
     <!-- Aquí se inserta el contenido de cada página -->
     <slot />
   </body>

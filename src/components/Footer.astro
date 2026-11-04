@@ -1,24 +1,43 @@
 ---
 import { Image } from "astro:assets";
 import texto from "../assets/brigitech-texto-header.png";
-
-// El año se actualiza solo
+import Icon from "./Icon.astro";
 const anio = new Date().getFullYear();
 ---
-<!-- pb-24 en celulares: deja espacio para que el botón de WhatsApp no tape el texto -->
-<footer class="border-t border-slate-800">
-  <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-6 pt-8 pb-24 text-sm sm:pb-8 text-slate-400 sm:flex-row">
-    <Image
-      src={texto}
-      alt="Brigitech"
-      width={352}
-      class="h-auto w-44 shrink-0"
-    />
-    <nav class="flex gap-6">
-      <a href="#servicios" class="hover:text-cyan-400">Servicios</a>
-      <a href="#proceso" class="hover:text-cyan-400">Cómo trabajamos</a>
-      <a href="#contacto" class="hover:text-cyan-400">Contacto</a>
-    </nav>
-    <span>© {anio} Brigitech. Todos los derechos reservados.</span>
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <a href="#" aria-label="Brigitech, volver al inicio"><Image src={texto} alt="Brigitech" width={352} class="footer-logo" /></a>
+      <p>Buenas ideas.<br />Software a la altura.</p>
+      <a href="https://www.instagram.com/brigitechcl/" class="footer-social" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Brigitech: @brigitechcl (se abre en una nueva pestaña)">
+        <Icon name="instagram" size={18} />
+        <span>@brigitechcl</span>
+        <Icon name="arrow-up" size={13} />
+      </a>
+    </div>
+    <nav aria-label="Enlaces del pie de página"><a href="#servicios">Servicios</a><a href="#proceso">Cómo trabajamos</a><a href="#preguntas">Preguntas frecuentes</a><a href="#contacto">Contacto <Icon name="arrow-up" size={14} /></a></nav>
+    <div class="footer-contact"><span>HAGAMOS ALGO BUENO JUNTOS</span><a href="mailto:brigitechcl@gmail.com">brigitechcl@gmail.com <Icon name="arrow-up" size={14} /></a><p>Desde Chile, para tu próximo desafío.</p></div>
   </div>
+  <div class="container footer-bottom"><p>© {anio} Brigitech. Todos los derechos reservados.</p><a href="#">Volver arriba <span aria-hidden="true">↑</span></a></div>
 </footer>
+
+<style>
+  .site-footer { border-top: 1px solid var(--line); background: #04090f; }
+  .footer-top { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 3rem; padding-block: 3rem; }
+  .footer-logo { width: 176px; height: auto; margin-left: -19px; }
+  .footer-brand p { color: #71859f; font-size: .78rem; line-height: 1.7; margin-top: .5rem; }
+  .footer-social { display: inline-flex; align-items: center; gap: .65rem; min-height: 42px; margin-top: 1.2rem; padding: .6rem .8rem; border: 1px solid #ffffff16; border-radius: .35rem; color: #a9b8cc; font-size: .75rem; transition: color .2s, border-color .2s, background .2s; }
+  .footer-social:hover { color: var(--cyan); border-color: #168cff60; background: #168cff0d; }
+  nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.5rem; align-content: center; }
+  nav a { display: flex; gap: .5rem; align-items: center; color: #a9b8cc; font-size: .72rem; }
+  nav a:hover, .footer-contact a:hover { color: var(--cyan); }
+  .footer-contact { align-self: center; }
+  .footer-contact > span { color: #647c96; font: .52rem monospace; letter-spacing: .1em; }
+  .footer-contact a { display: flex; align-items: center; gap: .8rem; color: #c0d0e1; font-size: .87rem; margin-top: 1rem; }
+  .footer-contact p { color: #657b96; font-size: .67rem; margin-top: .8rem; }
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; border-top: 1px solid var(--line); padding-block: 1.4rem; color: #748aa4; font-size: .67rem; }
+  .footer-bottom a { display: flex; align-items: center; gap: 1rem; color: #91a6bf; }
+  .footer-bottom a:hover { color: white; }
+  @media (max-width: 1023px) { .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; } .footer-contact { grid-column: 1 / -1; } }
+  @media (max-width: 479px) { .footer-top { grid-template-columns: 1fr; gap: 2rem; } nav { max-width: 20rem; } .footer-bottom { align-items: start; flex-direction: column; gap: 1rem; } }
+</style>

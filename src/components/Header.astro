@@ -2,149 +2,100 @@
 import { Image } from "astro:assets";
 import icono from "../assets/brigitech-icono-1024_alpha.png";
 import texto from "../assets/brigitech-texto-header.png";
+import Icon from "./Icon.astro";
 
-// Enlaces del menú: cada href apunta al id de una sección
 const enlaces = [
   { texto: "Servicios", href: "#servicios" },
-  { texto: "Rubros", href: "#rubros" },
+  { texto: "Soluciones", href: "#rubros" },
   { texto: "Cómo trabajamos", href: "#proceso" },
   { texto: "Preguntas", href: "#preguntas" },
 ];
 ---
-<header class="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/80 backdrop-blur">
-  <!-- Enlace oculto para saltar el menú con teclado -->
-  <a href="#contenido" class="sr-only focus:not-sr-only focus:absolute focus:p-2">
-    Saltar al contenido
-  </a>
-  <nav class="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 py-4 sm:px-6">
-    <!-- Logo compuesto por los dos archivos originales. -->
+<header class="site-header">
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+  <nav class="container header-inner" aria-label="Navegación principal">
     <a href="#" class="header-logo" aria-label="Brigitech, inicio">
-      <span class="header-logo-symbol">
-        <Image src={icono} alt="" width={128} loading="eager" />
-      </span>
-      <span class="header-logo-name">
-        <Image src={texto} alt="" width={512} loading="eager" />
-      </span>
+      <span class="header-logo-symbol"><Image src={icono} alt="" width={128} loading="eager" /></span>
+      <span class="header-logo-name"><Image src={texto} alt="" width={512} loading="eager" /></span>
     </a>
-    <ul class="hidden gap-6 text-sm text-slate-300 md:flex">
-      {enlaces.map((e) => (
-        <li><a href={e.href} class="transition hover:text-cyan-400">{e.texto}</a></li>
-      ))}
+    <ul class="desktop-menu">
+      {enlaces.map((e) => <li><a href={e.href}>{e.texto}</a></li>)}
     </ul>
-    <div class="flex items-center gap-2 sm:gap-3">
-      <a
-        href="#contacto"
-        class="rounded-lg bg-cyan-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400"
-      >
-        Conversemos
-      </a>
-      <!-- Botón ☰ que abre el menú en celulares (en pantallas grandes se oculta) -->
-      <button
-        id="boton-menu"
-        type="button"
-        aria-label="Abrir menú"
-        aria-expanded="false"
-        aria-controls="menu-movil"
-        class="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700 md:hidden"
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M4 7h16M4 12h16M4 17h16" />
-        </svg>
+    <div class="header-actions">
+      <a href="#contacto" class="header-cta">Conversemos <Icon name="arrow-up" size={15} /></a>
+      <button id="boton-menu" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil" class="menu-toggle">
+        <span class="menu-open-icon"><Icon name="menu" /></span>
+        <span class="menu-close-icon"><Icon name="close" /></span>
       </button>
     </div>
   </nav>
-
-  <!-- Menú desplegable para celulares -->
-  <ul id="menu-movil" hidden class="border-t border-slate-800 px-6 py-2 md:hidden">
-    {enlaces.map((e) => (
-      <li>
-        <a href={e.href} class="block py-3 text-slate-300 transition hover:text-cyan-400">{e.texto}</a>
-      </li>
-    ))}
+  <ul id="menu-movil" hidden class="mobile-menu container">
+    {enlaces.map((e) => <li><a href={e.href}>{e.texto}<Icon name="arrow-up" size={16} /></a></li>)}
   </ul>
 </header>
 
 <style>
-  .header-logo {
-    display: inline-flex;
-    flex-shrink: 0;
-    align-items: center;
-    gap: 0.4rem;
-    text-decoration: none;
-    border-radius: 0.25rem;
-  }
-
-  .header-logo:focus-visible {
-    outline: 2px solid #22d3ee;
-    outline-offset: 6px;
-  }
-
-  .header-logo-symbol,
-  .header-logo-name {
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  .header-logo-symbol {
-    width: 1.75rem;
-    height: 1.75rem;
-  }
-
-  .header-logo-name {
-    width: 6rem;
-    height: 1.4375rem;
-  }
-
-  /* Compensa los márgenes transparentes sin modificar ni deformar los PNG. */
-  .header-logo-symbol img,
-  .header-logo-name img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    max-width: none;
-    height: auto;
-    transform: translate(-50%, -50%);
-  }
-
-  .header-logo-symbol img {
-    width: 133.333%;
-  }
-
-  .header-logo-name img {
-    width: 120%;
-  }
-
+  .site-header { position: sticky; top: 0; z-index: 50; background: #060b12e8; border-bottom: 1px solid var(--line); backdrop-filter: blur(20px); }
+  .header-inner { min-height: 88px; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; }
+  .desktop-menu { display: flex; align-items: center; gap: 2rem; margin: 0; padding: 0; list-style: none; }
+  .desktop-menu a { font-size: .78rem; color: #abb7c7; transition: color .2s; }
+  .desktop-menu a:hover { color: white; }
+  .header-actions { display: flex; align-items: center; gap: .7rem; }
+  .header-cta { display: inline-flex; align-items: center; gap: 1rem; padding: .75rem 1rem; font-size: .78rem; font-weight: 600; background: #168cff12; border: 1px solid #168cff60; border-radius: .35rem; color: #c7e6ff; transition: background .2s; }
+  .header-cta:hover { background: #168cff30; }
+  .menu-toggle { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; background: transparent; color: white; border: 1px solid var(--line); border-radius: .35rem; }
+  .menu-close-icon { display: none; }
+  .menu-toggle[aria-expanded="true"] .menu-open-icon { display: none; }
+  .menu-toggle[aria-expanded="true"] .menu-close-icon { display: flex; }
+  .menu-open-icon { display: flex; }
+  .mobile-menu { padding-block: .5rem 1.2rem; list-style: none; }
+  .mobile-menu a { display: flex; align-items: center; justify-content: space-between; padding-block: 1rem; border-top: 1px solid var(--line); color: #cbd5e1; font-size: .9rem; }
+  .header-logo { display: inline-flex; flex-shrink: 0; align-items: center; gap: .4rem; border-radius: .25rem; }
+  .header-logo-symbol, .header-logo-name { position: relative; overflow: hidden; flex-shrink: 0; }
+  .header-logo-symbol { width: 1.75rem; height: 1.75rem; }
+  .header-logo-name { width: 6rem; height: 1.4375rem; }
+  /* Solo se compensan los márgenes transparentes; se conservan los logos originales. */
+  .header-logo-symbol img, .header-logo-name img { position: absolute; top: 50%; left: 50%; max-width: none; height: auto; transform: translate(-50%, -50%); }
+  .header-logo-symbol img { width: 133.333%; }
+  .header-logo-name img { width: 120%; }
   @media (min-width: 640px) {
-    .header-logo {
-      gap: 0.625rem;
-    }
-
-    .header-logo-symbol {
-      width: 2.5rem;
-      height: 2.5rem;
-    }
-
-    .header-logo-name {
-      width: 10rem;
-      height: 2.375rem;
-    }
+    .header-logo { gap: .625rem; }
+    .header-logo-symbol { width: 2.5rem; height: 2.5rem; }
+    .header-logo-name { width: 10rem; height: 2.375rem; }
+  }
+  @media (max-width: 1023px) {
+    .desktop-menu { display: none; }
+    .menu-toggle { display: flex; }
+    .header-inner { min-height: 76px; gap: .5rem; }
+  }
+  @media (min-width: 1024px) { .mobile-menu { display: none; } }
+  @media (max-width: 639px) {
+    .header-inner { min-height: 70px; }
+    .header-cta { padding: .65rem .7rem; font-size: .7rem; }
+    .header-cta :global(svg) { display: none; }
+    .header-actions { gap: .4rem; }
   }
 </style>
 
 <script>
-  // Abre y cierra el menú del celular; al elegir una sección se cierra solo
   const boton = document.getElementById("boton-menu") as HTMLButtonElement;
   const menu = document.getElementById("menu-movil") as HTMLUListElement;
-
   function mostrarMenu(abierto: boolean) {
     menu.hidden = !abierto;
     boton.setAttribute("aria-expanded", String(abierto));
     boton.setAttribute("aria-label", abierto ? "Cerrar menú" : "Abrir menú");
   }
-
   boton.addEventListener("click", () => mostrarMenu(menu.hidden));
   menu.addEventListener("click", (e) => {
     if ((e.target as HTMLElement).closest("a")) mostrarMenu(false);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !menu.hidden) {
+      mostrarMenu(false);
+      boton.focus();
+    }
+  });
+  window.matchMedia("(min-width: 1024px)").addEventListener("change", (e) => {
+    if (e.matches) mostrarMenu(false);
   });
 </script>
