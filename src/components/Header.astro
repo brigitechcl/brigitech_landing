@@ -1,4 +1,8 @@
 ---
+import { Image } from "astro:assets";
+import icono from "../assets/brigitech-icono-1024_alpha.png";
+import texto from "../assets/brigitech-texto-header.png";
+
 // Enlaces del menú: cada href apunta al id de una sección
 const enlaces = [
   { texto: "Servicios", href: "#servicios" },
@@ -13,9 +17,14 @@ const enlaces = [
     Saltar al contenido
   </a>
   <nav class="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 py-4 sm:px-6">
-    <!-- Nombre con el estilo del logo: letra gruesa en cursiva, "Brigi" blanco y "tech" azul -->
-    <a href="#" class="wordmark text-2xl sm:text-3xl">
-      <span class="wordmark-brigi">Brigi</span><span class="wordmark-tech">tech</span>
+    <!-- Logo compuesto por los dos archivos originales. -->
+    <a href="#" class="header-logo" aria-label="Brigitech, inicio">
+      <span class="header-logo-symbol">
+        <Image src={icono} alt="" width={128} loading="eager" />
+      </span>
+      <span class="header-logo-name">
+        <Image src={texto} alt="" width={512} loading="eager" />
+      </span>
     </a>
     <ul class="hidden gap-6 text-sm text-slate-300 md:flex">
       {enlaces.map((e) => (
@@ -54,6 +63,74 @@ const enlaces = [
     ))}
   </ul>
 </header>
+
+<style>
+  .header-logo {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    border-radius: 0.25rem;
+  }
+
+  .header-logo:focus-visible {
+    outline: 2px solid #22d3ee;
+    outline-offset: 6px;
+  }
+
+  .header-logo-symbol,
+  .header-logo-name {
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .header-logo-symbol {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .header-logo-name {
+    width: 6rem;
+    height: 1.4375rem;
+  }
+
+  /* Compensa los márgenes transparentes sin modificar ni deformar los PNG. */
+  .header-logo-symbol img,
+  .header-logo-name img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: none;
+    height: auto;
+    transform: translate(-50%, -50%);
+  }
+
+  .header-logo-symbol img {
+    width: 133.333%;
+  }
+
+  .header-logo-name img {
+    width: 120%;
+  }
+
+  @media (min-width: 640px) {
+    .header-logo {
+      gap: 0.625rem;
+    }
+
+    .header-logo-symbol {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .header-logo-name {
+      width: 10rem;
+      height: 2.375rem;
+    }
+  }
+</style>
 
 <script>
   // Abre y cierra el menú del celular; al elegir una sección se cierra solo
