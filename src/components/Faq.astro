@@ -13,9 +13,8 @@ const preguntas = [
   <div class="container faq-layout">
     <div class="faq-intro"><h2 id="faq-title" class="section-title">Preguntas frecuentes.</h2><p class="section-copy">Sabemos que desarrollar un proyecto puede generar dudas. Queremos que tomes decisiones con confianza.</p><a href="#contacto" class="text-link">¿Tienes otra pregunta?<Icon name="arrow-up" size={17} /></a></div>
     <div class="faq-list">
-      {preguntas.map((p, i) => (
+      {preguntas.map((p) => (
         <details name="preguntas-brigitech"><summary>
-          {/* <span class="faq-number">0{i + 1}</span> */}
           <span>{p.pregunta}</span><span class="faq-plus"><Icon name="plus" size={18} /></span>
           </summary><div class="faq-answer"><div><p>{p.respuesta}</p></div></div></details>
       ))}
@@ -33,7 +32,6 @@ const preguntas = [
   details:first-child { border-top: 1px solid #ffffff12; }
   summary { display: flex; align-items: center; gap: 1rem; list-style: none; padding: 1.5rem 0; font-size: .88rem; line-height: 1.6; }
   summary::-webkit-details-marker { display: none; }
-  .faq-number { font: .55rem monospace; color: #7890ab; }
   .faq-plus { display: inline-flex; margin-left: auto; color: #6893b8; transition: transform .2s; }
   details[open] .faq-plus { transform: rotate(45deg); color: var(--cyan); }
   details[open] summary { color: #8dd7ff; }

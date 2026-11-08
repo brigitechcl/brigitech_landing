@@ -15,7 +15,7 @@ const rubros = [
       <p class="section-copy">Cada rubro tiene sus propios desafíos. <br> La tecnología debería adaptarse a tu forma de trabajar, <b>no al  revés.</b> Adaptamos soluciones que hagan evolucionar a tu negocio.</p>
       <a href="#contacto" class="text-link">Encontrar mi solución <Icon name="arrow-up" size={18} /></a>
     </div>
-    <div class="industry-list">
+    <div>
       {rubros.map((r, i) => (
         <div class="industry-row">
           <span class="industry-number"></span>
@@ -34,13 +34,11 @@ const rubros = [
 <style>
   .industries { background: #eaf0f5; color: #101f31; position: relative; }
   .industries-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; }
-  .eyebrow { color: #1768b9; }
   .section-title { margin-top: 1.3rem; }
   .section-title > span { color: #6c8297; }
   .section-copy { color: #566c80; margin-top: 1.5rem; max-width: 24rem; font-size: .9rem; }
   .text-link { color: #1464ae; margin-top: 1.7rem; }
   .text-link:hover { color: #102c48; }
-  .intro-footnote { display: block; color: #536a7f; font: .54rem monospace; letter-spacing: .07em; margin-top: 3.5rem; }
   .industry-row { display: flex; align-items: center; gap: 1.5rem; padding-block: 1.6rem; border-bottom: 1px solid #122e451c; }
   .industry-row:first-child { border-top: 1px solid #122e451c; }
   .industry-number { color: #536a7f; font: 1rem monospace; }
@@ -52,7 +50,6 @@ const rubros = [
   @media (max-width: 1023px) { .industries-layout { gap: 3rem; } }
   @media (max-width: 767px) {
     .industries-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-    .intro-footnote { margin-top: 2rem; font-size: .49rem; }
     .industry-row { gap: 1rem; padding-block: 1.3rem; }
     .section-copy { max-width: 32rem; }
   }
