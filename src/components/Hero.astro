@@ -7,39 +7,28 @@ import Icon from "./Icon.astro";
   <div class="hero-glow" aria-hidden="true"></div>
   <div class="container hero-grid">
     <div class="hero-copy">
-      <!-- <p class="eyebrow"><span class="status-dot"></span> Desarrollo de software</p> -->
       <h1 id="hero-title">Software que<br />mueve tu<br /><span>negocio.</span></h1>
-      <p class="hero-description">Transformamos procesos complejos en experiencias simples. Diseñamos y desarrollamos tecnología a la medida de tu negocio.</p>
+      <p class="hero-description">Diseñamos y desarrollamos plataformas web, aplicaciones móviles y software a medida para impulsar tu negocio.</p>
       <div class="hero-actions">
         <a href="#contacto" class="button button-primary">Hablemos de tu proyecto <Icon name="arrow-up" size={18} /></a>
         <a href="#servicios" class="text-link">Explorar servicios <Icon name="arrow" size={17} /></a>
       </div>
-      <p class="hero-note"><Icon name="check" size={14} /> Una primera conversación. Sin compromiso.</p>
     </div>
-    <!-- Composición conceptual de arquitectura, no representa un producto o cliente real. -->
-    <div class="system-visual" role="img" aria-label="Tecnología que conecta tu web, tus procesos y tus aplicaciones">
-      <div class="visual-topline" aria-hidden="true"><span>DE LA IDEA AL SISTEMA</span><span class="visual-cross">+</span></div>
+    <div class="system-visual" role="img" aria-label="Brigitech desarrolla plataformas web, aplicaciones móviles y software a medida para tu negocio">
       <div class="blueprint-grid" aria-hidden="true"></div>
-      <div class="orbit orbit-one" aria-hidden="true"></div>
-      <div class="orbit orbit-two" aria-hidden="true"></div>
-      <svg class="connections" viewBox="0 0 480 450" fill="none" aria-hidden="true">
-        <path d="M240 220V112H100M240 220h140v-55M240 220v115H140" stroke="#168cff" stroke-opacity=".5" stroke-dasharray="4 6" />
-        <circle r="3" fill="#31c7ef"><animateMotion dur="7s" repeatCount="indefinite" path="M100 112H240V220H380V165" /></circle>
-        <circle r="3" fill="#31c7ef"><animateMotion dur="6s" repeatCount="indefinite" path="M240 220V335H140" /></circle>
+      <!-- <div class="orbit orbit-one" aria-hidden="true"></div> -->
+      <!-- <div class="orbit orbit-two" aria-hidden="true"></div> -->
+      <svg class="connections" viewBox="0 0 480 450" preserveAspectRatio="none" fill="none" aria-hidden="true">
+        <path d="M110 225H155Q175 225 175 205V128Q175 108 195 108H240 M110 225H240 M110 225H155Q175 225 175 245V322Q175 342 195 342H240" stroke="#168cff" stroke-opacity=".55" stroke-dasharray="4 6" />
+        <circle r="3" fill="#31c7ef"><animateMotion dur="4s" repeatCount="indefinite" path="M110 225H155Q175 225 175 205V128Q175 108 195 108H240" /></circle>
+        <circle r="3" fill="#31c7ef"><animateMotion dur="3s" repeatCount="indefinite" path="M110 225H240" /></circle>
+        <circle r="3" fill="#31c7ef"><animateMotion dur="4.5s" repeatCount="indefinite" path="M110 225H155Q175 225 175 245V322Q175 342 195 342H240" /></circle>
       </svg>
       <div class="system-core"><Image src={icono} alt="" width={160} loading="eager" /></div>
-      <div class="system-node node-web"><span class="node-icon"><Icon name="code" size={19} /></span><div><small>EXPERIENCIA</small><strong>Tu plataforma web</strong></div><span class="node-dot"></span></div>
-      <div class="system-node node-ops"><span class="node-icon"><Icon name="layers" size={19} /></span><div><small>OPERACIÓN</small><strong>Todo conectado</strong></div></div>
-      <div class="system-node node-app"><span class="node-icon"><Icon name="phone" size={19} /></span><div><small>ALCANCE</small><strong>Tu app, en todas partes</strong></div></div>
-      <div class="visual-bottom" aria-hidden="true"><span><span class="status-dot"></span> Construido para tu negocio</span><span>01 — ∞</span></div>
-      <div class="visual-corner" aria-hidden="true"></div>
+      <div class="system-node node-web"><span class="node-icon"><Icon name="code" size={19} /></span><div><strong>Plataformas web</strong><small>Tu negocio en línea</small></div></div>
+      <div class="system-node node-ops"><span class="node-icon"><Icon name="layers" size={19} /></span><div><strong>Software a medida</strong><small>Hecho para tus procesos</small></div></div>
+      <div class="system-node node-app"><span class="node-icon"><Icon name="phone" size={19} /></span><div><strong>Aplicaciones móviles</strong><small>Tu negocio en movimiento</small></div></div>
     </div>
-  </div>
-  <div class="container hero-foundation">
-    <p>No es solo código.<br /><strong>Es lo que puedes hacer con él.</strong></p>
-    <div><span>01 /</span> Menos tareas manuales</div>
-    <div><span>02 /</span> Sistemas que conversan</div>
-    <div><span>03 /</span> Espacio para crecer</div>
   </div>
 </section>
 
@@ -69,15 +58,15 @@ import Icon from "./Icon.astro";
   .orbit-one { width: 60%; aspect-ratio: 1; }
   .orbit-two { width: 83%; aspect-ratio: 1; border-style: dashed; }
   .connections { position: absolute; width: 100%; height: 100%; inset: 0; }
-  .system-core { position: absolute; left: 50%; top: 49%; transform: translate(-50%, -50%) rotate(-8deg); width: 92px; height: 92px; display: grid; place-items: center; border-radius: 24px; border: 1px solid #168cff66; background: linear-gradient(140deg, #11283d, #08121e); box-shadow: 0 0 80px #168cff20, inset 0 0 30px #168cff0d; }
+  .system-core { position: absolute; left: 23%; top: 50%; transform: translate(-50%, -50%) rotate(-8deg); width: 82px; height: 82px; display: grid; place-items: center; border-radius: 24px; border: 1px solid #168cff66; background: linear-gradient(140deg, #11283d, #08121e); box-shadow: 0 0 80px #168cff20, inset 0 0 30px #168cff0d; }
   .system-core :global(img) { width: 88px; height: auto; transform: rotate(8deg); }
-  .system-node { position: absolute; display: flex; align-items: center; gap: .7rem; padding: .9rem 1rem; border: 1px solid #8ebfff24; background: linear-gradient(125deg, #142335, #0b1420); border-radius: .65rem; box-shadow: 0 12px 40px #0003; }
-  .system-node small { display: block; color: #8095ad; font: .5rem monospace; letter-spacing: .12em; margin-bottom: .35rem; }
+  .system-node { position: absolute; left: 50%; right: 0; transform: translateY(-50%); display: flex; align-items: center; gap: .7rem; padding: .9rem 1rem; border: 1px solid #8ebfff24; background: linear-gradient(125deg, #142335, #0b1420); border-radius: .65rem; box-shadow: 0 12px 40px #0003; }
+  .system-node small { display: block; color: #92a7bc; font-size: .62rem; line-height: 1.4; margin-top: .25rem; }
   .system-node strong { display: block; font-weight: 500; font-size: .73rem; white-space: nowrap; }
-  .node-icon { display: grid; place-items: center; width: 32px; height: 32px; background: #168cff12; border: 1px solid #168cff22; border-radius: .35rem; color: #43b6ff; }
-  .node-web { left: 0; top: 19%; }
-  .node-ops { right: -1%; top: 35%; }
-  .node-app { left: 12%; bottom: 16%; }
+  .node-icon { display: grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; background: #168cff12; border: 1px solid #168cff22; border-radius: .35rem; color: #43b6ff; }
+  .node-web { top: 24%; }
+  .node-ops { top: 50%; }
+  .node-app { top: 76%; }
   .node-dot { width: 4px; height: 4px; background: var(--cyan); border-radius: 50%; margin-left: .5rem; }
   .visual-corner { position: absolute; width: 14px; height: 14px; border-right: 1px solid #168cff80; border-bottom: 1px solid #168cff80; bottom: -1px; right: 0; }
   .hero-foundation { display: grid; grid-template-columns: 1.15fr 1fr 1fr 1fr; align-items: center; gap: 2rem; border-top: 1px solid var(--line); padding-block: 1.8rem; }
@@ -87,11 +76,9 @@ import Icon from "./Icon.astro";
   .hero-foundation > div > span { color: #718ba5; margin-right: .8rem; font: .6rem monospace; }
   @media (min-width: 1440px) { .hero-grid { padding-block: 7rem; } }
   @media (max-width: 1023px) {
-    .hero-grid { grid-template-columns: 1.1fr 1fr; gap: 1.5rem; padding-top: 4.5rem; }
+    .hero-grid { grid-template-columns: 1fr; padding-top: 4.5rem; }
+    .system-visual { display: none; }
     h1 { font-size: clamp(3rem, 5.5vw, 4.5rem); }
-    .system-node { gap: .5rem; padding: .7rem; }
-    .system-node strong { font-size: .62rem; }
-    .node-icon { width: 25px; height: 28px; }
     .hero-foundation { grid-template-columns: 1fr 1fr; gap: 1rem; }
   }
   @media (max-width: 767px) {
@@ -99,12 +86,6 @@ import Icon from "./Icon.astro";
     h1 { font-size: clamp(2.9rem, 9vw, 4.8rem); }
     .hero-description { font-size: .94rem; }
     .hero-actions { gap: 1.4rem; }
-    .system-visual { max-width: 460px; margin-inline: auto; }
-    .system-core { left: 35%; width: 64px; height: 64px; border-radius: 18px; }
-    .system-core :global(img) { width: 62px; }
-    .connections { transform: translateX(-15%); }
-    .node-web { top: 16%; }
-    .system-node strong { font-size: .7rem; }
     .hero-foundation { padding-block: 1.5rem; gap: 1.2rem; }
     .hero-foundation > div { font-size: .68rem; }
     .hero-foundation > div > span { margin-right: .3rem; }

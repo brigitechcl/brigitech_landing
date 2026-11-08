@@ -11,10 +11,13 @@ const preguntas = [
 ---
 <section id="preguntas" class="faq-section section" aria-labelledby="faq-title">
   <div class="container faq-layout">
-    <div class="faq-intro"><p class="eyebrow">Antes de empezar</p><h2 id="faq-title" class="section-title">Buenas preguntas.<br />Respuestas claras.</h2><p class="section-copy">Elegir un equipo de desarrollo es una decisión importante. Queremos que la tomes con confianza.</p><a href="#contacto" class="text-link">Tengo otra pregunta <Icon name="arrow-up" size={17} /></a></div>
+    <div class="faq-intro"><h2 id="faq-title" class="section-title">Buenas preguntas.<br />Respuestas claras.</h2><p class="section-copy">Elegir un equipo de desarrollo es una decisión importante. Queremos que la tomes con confianza.</p><a href="#contacto" class="text-link">Tengo otra pregunta <Icon name="arrow-up" size={17} /></a></div>
     <div class="faq-list">
       {preguntas.map((p, i) => (
-        <details name="preguntas-brigitech"><summary><span class="faq-number">0{i + 1}</span><span>{p.pregunta}</span><span class="faq-plus"><Icon name="plus" size={18} /></span></summary><div class="faq-answer"><p>{p.respuesta}</p></div></details>
+        <details name="preguntas-brigitech"><summary>
+          {/* <span class="faq-number">0{i + 1}</span> */}
+          <span>{p.pregunta}</span><span class="faq-plus"><Icon name="plus" size={18} /></span>
+          </summary><div class="faq-answer"><p>{p.respuesta}</p></div></details>
       ))}
     </div>
   </div>

@@ -1,26 +1,26 @@
 ---
 import Icon from "./Icon.astro";
 const pasos = [
-  { titulo: "Escuchamos", detalle: "Conocemos tu operación, tus desafíos y lo que quieres lograr. La solución empieza con las preguntas correctas.", entrega: "Diagnóstico y objetivos" },
-  { titulo: "Trazamos el plan", detalle: "Aterrizamos la idea en una propuesta concreta: qué construiremos, cómo lo haremos y cuánto costará.", entrega: "Alcance, plazos y presupuesto" },
-  { titulo: "Construimos contigo", detalle: "Desarrollamos por etapas. Ves avances reales, pruebas lo que funciona y participas en las decisiones.", entrega: "Entregas y validación" },
-  { titulo: "Lanzamos y seguimos", detalle: "Ponemos todo en marcha, te entregamos el código y acompañamos la evolución de tu plataforma.", entrega: "Lanzamiento y continuidad" },
+  { titulo: "Cuéntanos tu idea", detalle: "Conversamos sobre lo que necesitas, identificamos el problema y exploramos cómo podemos ayudarte a resolverlo."},
+  { titulo: "Definimos el proyecto", detalle: "Definimos presupuestos, establecemos las funcionalidades y los tiempos de desarrollo para que sepas exactamente qué vamos a construir."},
+  { titulo: "Desarrollamos tu solución", detalle: "Transformamos la propuesta en software funcional. Compartimos avances y realizamos pruebas para asegurarnos de que cumpla tus necesidades."},
+  { titulo: "Puesta en marcha", detalle: "Preparamos la solución para su uso, te mostramos cómo funciona y acompañamos la evolución de tu plataforma."},
 ];
 ---
 <section id="proceso" class="section container" aria-labelledby="process-title">
-  <div class="section-heading"><div><p class="eyebrow">Una forma clara de avanzar</p><h2 id="process-title" class="section-title">Sin cajas negras.<br />Sin sorpresas.</h2></div><p class="section-copy">Un proceso cercano y transparente. Sabes en qué estamos, qué viene después y por qué tomamos cada decisión.</p></div>
+  <div class="section-heading"><div><h2 id="process-title" class="section-title">Como trabajamos.<br />Sin sorpresas.</h2></div><p class="section-copy">Valoramos un proceso cercano y transparente. Sabrás en qué estamos, qué viene después y por qué tomamos cada decisión.</p></div>
   <ol class="process-grid">
     {pasos.map((p, i) => (
-      <li><div class="step-line"><span class="step-number">0{i + 1}</span><span class="step-connector"></span><Icon name="arrow" size={15} /></div><h3>{p.titulo}</h3><p>{p.detalle}</p><span class="step-delivery">{p.entrega}</span></li>
+      <li><div class="step-line"><span class="step-number">{i + 1}</span><span class="step-connector"></span><Icon name="arrow" size={15} /></div><h3>{p.titulo}</h3><p>{p.detalle}</p></li>
     ))}
   </ol>
-  <div class="ownership"><span class="ownership-icon"><Icon name="code" size={26} /></span><div><h3>Tu proyecto. Tu código. Tu control.</h3><p>Lo que construimos para ti, es tuyo. Código fuente y acceso a tus datos, sin dependencias innecesarias.</p></div><span class="ownership-label"><Icon name="check" size={15} /> Así trabajamos</span></div>
+  <div class="ownership"><span class="ownership-icon"><Icon name="code" size={26} /></span><div><h3>Tu proyecto. Tu código. Tu control.</h3><p>Lo que construimos para ti, es tuyo. Código fuente y acceso a tus datos, sin dependencias innecesarias.</p></div></div>
 </section>
 
 <style>
   .process-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; list-style: none; padding: 0; margin: 3.5rem 0 0; }
   .step-line { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.7rem; }
-  .step-number { font: .75rem monospace; color: var(--cyan); }
+  .step-number { font: .9rem monospace; color: var(--cyan); }
   .step-connector { height: 1px; flex: 1; background: #ffffff15; }
   .step-line :global(svg) { color: #45607c; }
   .process-grid h3 { font-size: 1.13rem; font-weight: 500; letter-spacing: -.035em; }

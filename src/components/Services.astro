@@ -2,37 +2,35 @@
 import Icon from "./Icon.astro";
 const servicios = [
   { nombre: "Apps móviles", detalle: "Lleva tu negocio al bolsillo de tus clientes, en Android e iOS.", icono: "phone" as const, etiqueta: "iOS & Android" },
-  { nombre: "Integraciones y APIs", detalle: "Tus plataformas, pagos y datos trabajando como un solo sistema.", icono: "connect" as const, etiqueta: "Todo conectado" },
   { nombre: "Ecommerce", detalle: "Una experiencia de compra fluida, desde el catálogo hasta el pago.", icono: "bag" as const, etiqueta: "Comercio digital" },
   { nombre: "Soporte y evolución", detalle: "El lanzamiento es el comienzo. Mantenemos y mejoramos tu software.", icono: "support" as const, etiqueta: "Mejora continua" },
 ];
 ---
 <section id="servicios" class="section container" aria-labelledby="services-title">
   <div class="section-heading">
-    <div><p class="eyebrow">Lo que construimos</p><h2 id="services-title" class="section-title">Tecnología con propósito.<br />No soluciones genéricas.</h2></div>
+    <div><h2 id="services-title" class="section-title">Tecnología con propósito.<br />No soluciones genéricas.</h2></div>
     <p class="section-copy">Desde tu primera plataforma hasta el sistema que conecta toda tu operación. Encontramos la solución que tiene sentido para ti.</p>
   </div>
   <div class="services-grid">
     <a href="#contacto" class="service-card service-featured">
-      <div class="card-top"><span class="service-icon"><Icon name="layers" size={23} /></span><span class="service-index">01 / A TU MEDIDA</span><Icon name="arrow-up" size={21} /></div>
+      <div class="card-top"><span class="service-icon"><Icon name="layers" size={23} /></span><Icon name="arrow-up" size={21} /></div>
       <h3>Software que trabaja<br />como tu negocio.</h3>
       <p>Sistemas a medida para ordenar tu operación, automatizar lo repetitivo y darle a tu equipo más tiempo para lo importante.</p>
       <div class="workflow" aria-hidden="true"><span><span class="workflow-dot"></span> Tu proceso</span><i></i><span class="workflow-center"><Icon name="code" size={16} /> Software a medida</span><i></i><span><Icon name="check" size={14} /> Más simple</span></div>
-      <div class="card-bottom"><span>Software a medida</span><span>Diseñado alrededor de ti</span></div>
+      <div class="card-bottom"><span>Software a medida</span></div>
     </a>
     <a href="#contacto" class="service-card service-web">
-      <div class="card-top"><span class="service-icon"><Icon name="code" size={23} /></span><span class="service-index">02 / EXPERIENCIA DIGITAL</span><Icon name="arrow-up" size={21} /></div>
+      <div class="card-top"><span class="service-icon"><Icon name="code" size={23} /></span><Icon name="arrow-up" size={21} /></div>
       <h3>Tu mejor versión.<br />También en la web.</h3>
       <p>Sitios y aplicaciones web que combinan diseño, velocidad y una experiencia que invita a quedarse.</p>
       <div class="web-preview" aria-hidden="true"><div class="preview-toolbar"><i></i><i></i><i></i><span>tu-negocio.cl</span></div><div class="preview-body"><div><span></span><span></span><span></span><b></b></div><div class="preview-art"><span></span></div></div></div>
-      <div class="card-bottom"><span>Desarrollo web</span><span>Diseño + rendimiento</span></div>
+      <div class="card-bottom"><span>Desarrollo web</span></div>
     </a>
-    {servicios.map((s, i) => (
+    {servicios.map((s) => (
       <a href="#contacto" class="service-card service-small">
         <div class="card-top"><span class="service-icon"><Icon name={s.icono} size={22} /></span><Icon name="arrow-up" size={18} /></div>
-        <span class="small-index">0{i + 3}</span>
-        <h3>{s.nombre}</h3><p>{s.detalle}</p>
-        <span class="service-tag">{s.etiqueta}</span>
+        <h3>{s.nombre}</h3>
+        <p>{s.detalle}</p>
       </a>
     ))}
   </div>
@@ -58,7 +56,6 @@ const servicios = [
   .workflow-dot { width: 5px; height: 5px; background: #7793b5; border-radius: 50%; }
   .workflow :global(svg) { color: #55b7ff; }
   .card-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); padding-top: 1.1rem; margin-top: auto; font-size: .65rem; gap: 1rem; }
-  .card-bottom > span:last-child { color: #70849e; font-size: .6rem; }
   .web-preview { border: 1px solid #ffffff13; background: #080f18; border-radius: .45rem .45rem 0 0; margin-top: 1.8rem; margin-bottom: 1.3rem; width: 85%; margin-inline: auto; }
   .preview-toolbar { display: flex; align-items: center; gap: 3px; border-bottom: 1px solid var(--line); padding: .6rem .7rem; }
   .preview-toolbar i { width: 3px; height: 3px; border-radius: 50%; background: #34445a; }
@@ -70,7 +67,7 @@ const servicios = [
   .preview-body b { display: block; width: 30px; height: 10px; border-radius: 2px; background: #168cff; margin-top: .75rem; }
   .preview-art { display: grid; place-items: center; background: #0e2136; border: 1px solid #168cff25; border-radius: .25rem; }
   .preview-art > span { width: 38px; height: 38px; transform: rotate(30deg); border: 1px solid #168cff70; background: linear-gradient(120deg, #168cff28, transparent); border-radius: 8px; }
-  .service-small { grid-column: span 3; padding: 1.6rem; }
+  .service-small { grid-column: span 4; padding: 1.6rem; }
   .service-small .card-top { margin-bottom: 1.5rem; }
   .small-index { position: absolute; top: 5.2rem; right: 1.6rem; font: .6rem monospace; color: #7b91ab; }
   .service-small h3 { font-size: 1.1rem; letter-spacing: -.025em; }
@@ -78,7 +75,6 @@ const servicios = [
   .service-tag { align-self: start; margin-top: auto; font: .54rem monospace; color: #7f94ad; border: 1px solid #ffffff0c; padding: .35rem .5rem; border-radius: .2rem; }
   @media (max-width: 1023px) {
     .service-featured, .service-web { grid-column: span 6; }
-    .service-small { grid-column: span 6; }
     .service-card { padding: 1.5rem; }
     h3 { font-size: 1.6rem; }
     .workflow { flex-wrap: wrap; gap: .5rem; }
