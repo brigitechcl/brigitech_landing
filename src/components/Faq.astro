@@ -17,7 +17,7 @@ const preguntas = [
         <details name="preguntas-brigitech"><summary>
           {/* <span class="faq-number">0{i + 1}</span> */}
           <span>{p.pregunta}</span><span class="faq-plus"><Icon name="plus" size={18} /></span>
-          </summary><div class="faq-answer"><p>{p.respuesta}</p></div></details>
+          </summary><div class="faq-answer"><div><p>{p.respuesta}</p></div></div></details>
       ))}
     </div>
   </div>
@@ -37,7 +37,14 @@ const preguntas = [
   .faq-plus { display: inline-flex; margin-left: auto; color: #6893b8; transition: transform .2s; }
   details[open] .faq-plus { transform: rotate(45deg); color: var(--cyan); }
   details[open] summary { color: #8dd7ff; }
-  .faq-answer { padding: 0 2rem 1.5rem; color: var(--muted); font-size: .9rem; line-height: 1.85; }
+  .faq-answer { color: var(--muted); font-size: .9rem; line-height: 1.85; }
+  .faq-answer > div { overflow: hidden; }
+  .faq-answer p { padding: 0 2rem 1.5rem; }
+  @supports (interpolate-size: allow-keywords) {
+    details { interpolate-size: allow-keywords; }
+    details::details-content { height: 0; overflow: clip; transition: height .35s ease, content-visibility .35s allow-discrete; }
+    details[open]::details-content { height: auto; }
+  }
   @media (max-width: 1023px) { .faq-layout { gap: 3rem; } }
-  @media (max-width: 767px) { .faq-layout { grid-template-columns: 1fr; gap: 2.5rem; } .section-copy { max-width: 30rem; } summary { font-size: .82rem; gap: .75rem; } .faq-answer { padding-inline: 1.5rem; } }
+  @media (max-width: 767px) { .faq-layout { grid-template-columns: 1fr; gap: 2.5rem; } .section-copy { max-width: 30rem; } summary { font-size: .82rem; gap: .75rem; } .faq-answer p { padding-inline: 1.5rem; } }
 </style>

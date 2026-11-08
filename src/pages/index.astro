@@ -26,3 +26,35 @@ import Footer from "../components/Footer.astro";
   <Footer />
   <!-- <WhatsApp /> -->
 </Layout>
+
+<script>
+  const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  if (!motionPreference.matches && "IntersectionObserver" in window) {
+    const elements = document.querySelectorAll<HTMLElement>(
+      ".hero-copy, .showcase, .mobile-showcase, .section-heading, .service-card, .industries-intro, .industry-row, .industry-note, .process-grid > li, .ownership, .faq-intro, .faq-list > details, .contact-intro, .contact-card"
+    );
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.remove("reveal-pending");
+        entry.target.classList.add("reveal-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0, rootMargin: "0px 0px -24px 0px" });
+
+    elements.forEach((element) => {
+      if (element.getBoundingClientRect().top >= window.innerHeight) {
+        element.classList.add("reveal-pending");
+      }
+      observer.observe(element);
+    });
+
+    motionPreference.addEventListener("change", (event) => {
+      if (!event.matches) return;
+      observer.disconnect();
+      elements.forEach((element) => element.classList.remove("reveal-pending"));
+    });
+  }
+</script>
