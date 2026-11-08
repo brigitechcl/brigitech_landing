@@ -1,5 +1,10 @@
 # Astro Starter Kit: Minimal
 
+## Catálogo de productos
+
+La página `/productos/` utiliza un archivo JSON por producto en `src/content/productos/`.
+Consulta [la guía para añadir productos](docs/productos.md) para crear, ordenar y publicar nuevas entradas.
+
 ```sh
 npm create astro@latest -- --template minimal
 ```

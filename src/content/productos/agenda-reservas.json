@@ -1,0 +1,9 @@
+{
+  "nombre": "Agenda de reservas",
+  "resumen": "Organiza los horarios de tu negocio y simplifica la forma en que tus clientes reservan una atención.",
+  "categoria": "Productividad",
+  "caracteristicas": ["Calendario de reservas", "Disponibilidad de horarios", "Registro de clientes"],
+  "icono": "connect",
+  "orden": 3,
+  "ejemplo": true
+}
