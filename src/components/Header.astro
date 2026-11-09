@@ -32,9 +32,13 @@ const links = [
       </button>
     </div>
   </nav>
-  <ul id="menu-movil" hidden class="mobile-menu container">
-    {links.map((link) => <li><a href={link.href} aria-current={link.active ? "page" : undefined}>{link.label}<Icon name="arrow-up" size={16} /></a></li>)}
-  </ul>
+  <div id="menu-movil" class="mobile-menu-panel" inert>
+    <div class="mobile-menu-inner">
+      <ul class="mobile-menu container">
+        {links.map((link) => <li><a href={link.href} aria-current={link.active ? "page" : undefined}>{link.label}<Icon name="arrow-up" size={16} /></a></li>)}
+      </ul>
+    </div>
+  </div>
 </header>
 
 <style>
@@ -47,11 +51,14 @@ const links = [
   .header-actions { display: flex; align-items: center; gap: .7rem; }
   .header-cta { display: inline-flex; align-items: center; gap: 1rem; padding: .75rem 1rem; font-size: .78rem; font-weight: 600; background: #168cff12; border: 1px solid #168cff60; border-radius: .35rem; color: #c7e6ff; transition: background .2s; }
   .header-cta:hover { background: #168cff30; }
-  .menu-toggle { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; background: transparent; color: white; border: 1px solid var(--line); border-radius: .35rem; }
+  .menu-toggle { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; background: transparent; color: white; border: 0; border-radius: .35rem; }
   .menu-close-icon { display: none; }
   .menu-toggle[aria-expanded="true"] .menu-open-icon { display: none; }
   .menu-toggle[aria-expanded="true"] .menu-close-icon { display: flex; }
   .menu-open-icon { display: flex; }
+  .mobile-menu-panel { position: absolute; top: 100%; left: 0; width: 100%; display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden; background: #060b12f5; transition: grid-template-rows .3s ease, opacity .3s ease, visibility 0s linear .3s; }
+  .mobile-menu-panel:not([inert]) { grid-template-rows: 1fr; opacity: 1; visibility: visible; transition-delay: 0s; }
+  .mobile-menu-inner { min-height: 0; overflow: hidden; }
   .mobile-menu { padding-block: .5rem 1.2rem; list-style: none; }
   .mobile-menu a { display: flex; align-items: center; justify-content: space-between; padding-block: 1rem; border-top: 1px solid var(--line); color: #cbd5e1; font-size: .9rem; }
   .header-logo { display: inline-flex; flex-shrink: 0; align-items: center; gap: .4rem; border-radius: .25rem; }
@@ -72,7 +79,8 @@ const links = [
     .menu-toggle { display: flex; }
     .header-inner { min-height: 76px; gap: .5rem; }
   }
-  @media (min-width: 1024px) { .mobile-menu { display: none; } }
+  @media (min-width: 1024px) { .mobile-menu-panel { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .mobile-menu-panel { transition: none; } }
   @media (max-width: 639px) {
     .header-inner { min-height: 70px; }
     .header-cta { padding: .65rem .7rem; font-size: .7rem; }
@@ -83,18 +91,18 @@ const links = [
 
 <script>
   const boton = document.getElementById("boton-menu") as HTMLButtonElement;
-  const menu = document.getElementById("menu-movil") as HTMLUListElement;
+  const menu = document.getElementById("menu-movil") as HTMLDivElement;
   function mostrarMenu(abierto: boolean) {
-    menu.hidden = !abierto;
+    menu.inert = !abierto;
     boton.setAttribute("aria-expanded", String(abierto));
     boton.setAttribute("aria-label", abierto ? "Cerrar menú" : "Abrir menú");
   }
-  boton.addEventListener("click", () => mostrarMenu(menu.hasAttribute("hidden")));
+  boton.addEventListener("click", () => mostrarMenu(menu.inert));
   menu.addEventListener("click", (e) => {
     if ((e.target as HTMLElement).closest("a")) mostrarMenu(false);
   });
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !menu.hidden) {
+    if (e.key === "Escape" && !menu.inert) {
       mostrarMenu(false);
       boton.focus();
     }
