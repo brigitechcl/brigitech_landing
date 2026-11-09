@@ -1,0 +1,20 @@
+{
+  "name": "Brigitech Semitonos",
+  "summary": "Aplicación de escritorio para transformar imágenes en diseños de semitonos para estampado textil, preparados para flujos de trabajo DTF y serigrafía.",
+  "category": "Diseño",
+  "features": [
+    "Generación de semitonos",
+    "Mejora de imágenes",
+    "Exportación PNG transparente"
+  ],
+  "backgroundImage": {
+    "src": "/products/brigitech-semitonos/brigitech-semitonos-bg.png",
+    "alt": "Brigitech Semitonos Icono"
+  },
+  "iconImage": {
+    "src": "/products/brigitech-semitonos/brigitech-semitonos-icon.png",
+    "alt": "Brigitech Semitonos Icono"
+  },
+  "link": "https://pub-7eb9dd1c6b6c4691953ef948fa056a20.r2.dev/Semitonos-Instalador-x64.exe",
+  "status": "available"
+}
