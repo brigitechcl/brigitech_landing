@@ -1,0 +1,15 @@
+{
+  "name": "Tienda online",
+  "summary": "Una vitrina digital para presentar tu catálogo y conectar tus productos con nuevos clientes.",
+  "category": "Comercio digital",
+  "features": [
+    "Catálogo de productos",
+    "Carrito de compras",
+    "Gestión de pedidos"
+  ],
+  "backgroundImage": null,
+  "iconImage": null,
+  "order": 2,
+  "example": true,
+  "draft": true
+}

@@ -6,14 +6,14 @@ import Footer from "../components/Footer.astro";
 import Icon from "../components/Icon.astro";
 import ProductCard from "../components/ProductCard.astro";
 
-const productos = (await getCollection("productos", ({ data }) => !data.borrador))
-  .sort((a, b) => a.data.orden - b.data.orden || a.data.nombre.localeCompare(b.data.nombre, "es"));
-const categorias = [...new Set(productos.map(({ data }) => data.categoria))].sort((a, b) => a.localeCompare(b, "es"));
-const hayEjemplos = productos.some(({ data }) => data.ejemplo);
+const products = (await getCollection("products", ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name, "es"));
+const categories = [...new Set(products.map(({ data }) => data.category))].sort((a, b) => a.localeCompare(b, "es"));
+const hasExamples = products.some(({ data }) => data.example);
 ---
 <Layout title="Productos | Brigitech" description="Explora el catálogo de productos de Brigitech y encuentra soluciones digitales para tu negocio.">
   <Header />
-  <main id="contenido" class="catalog-page">
+  <main id="content" class="catalog-page">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Ruta de navegación"><a href="/">Inicio</a><span aria-hidden="true">/</span><span aria-current="page">Productos</span></nav>
       <header class="catalog-heading" data-reveal>
@@ -28,27 +28,27 @@ const hayEjemplos = productos.some(({ data }) => data.ejemplo);
       <section class="catalog" aria-label="Catálogo de productos">
         <form class="catalog-controls" role="search" aria-label="Buscar productos" hidden>
           <div class="search-field">
-            <label for="buscar-producto">Buscar producto</label>
-            <input id="buscar-producto" name="buscar" type="search" placeholder="Nombre, característica…" autocomplete="off" />
+            <label for="product-search">Buscar producto</label>
+            <input id="product-search" name="search" type="search" placeholder="Nombre, característica…" autocomplete="off" />
           </div>
           <div class="category-field">
-            <label for="categoria-producto">Categoría</label>
-            <select id="categoria-producto" name="categoria"><option value="">Todas las categorías</option>{categorias.map((categoria) => <option value={categoria}>{categoria}</option>)}</select>
+            <label for="product-category">Categoría</label>
+            <select id="product-category" name="category"><option value="">Todas las categorías</option>{categories.map((category) => <option value={category}>{category}</option>)}</select>
           </div>
         </form>
         <div class="catalog-meta">
-          <p id="catalog-count" role="status" aria-live="polite" aria-atomic="true">{productos.length} {productos.length === 1 ? "producto" : "productos"}</p>
+          <p id="catalog-count" role="status" aria-live="polite" aria-atomic="true">{products.length} {products.length === 1 ? "producto" : "productos"}</p>
           <span>Diseño y tecnología, por Brigitech</span>
         </div>
-        {hayEjemplos && <p class="examples-note">Catálogo en preparación. Los productos marcados como ejemplo son ilustrativos y no representan una oferta disponible.</p>}
-        <div class="products-grid" id="productos-lista">
-          {productos.map((producto, index) => <ProductCard producto={producto} numero={index + 1} />)}
+        {hasExamples && <p class="examples-note">Catálogo en preparación. Los productos marcados como ejemplo son ilustrativos y no representan una oferta disponible.</p>}
+        <div class="products-grid" id="product-list">
+          {products.map((product) => <ProductCard product={product} />)}
         </div>
-        <div class="empty-state" id="sin-resultados" hidden={productos.length > 0}>
+        <div class="empty-state" id="no-results" hidden={products.length > 0}>
           <span class="empty-icon"><Icon name="layers" size={28} /></span>
-          <h2>{productos.length ? "No encontramos productos" : "Estamos preparando nuestro catálogo"}</h2>
-          <p>{productos.length ? "Prueba con otra búsqueda o selecciona una categoría diferente." : "Pronto podrás conocer nuestros productos. Mientras tanto, cuéntanos qué necesitas."}</p>
-          {productos.length ? <button type="button" id="limpiar-filtros" class="button button-secondary">Limpiar filtros <Icon name="arrow" size={16} /></button> : <a href="/#contacto" class="button button-secondary">Conversemos <Icon name="arrow" size={16} /></a>}
+          <h2>{products.length ? "No encontramos productos" : "Estamos preparando nuestro catálogo"}</h2>
+          <p>{products.length ? "Prueba con otra búsqueda o selecciona una categoría diferente." : "Pronto podrás conocer nuestros productos. Mientras tanto, cuéntanos qué necesitas."}</p>
+          {products.length ? <button type="button" id="clear-filters" class="button button-secondary">Limpiar filtros <Icon name="arrow" size={16} /></button> : <a href="/#contacto" class="button button-secondary">Conversemos <Icon name="arrow" size={16} /></a>}
         </div>
       </section>
     </div>
@@ -97,12 +97,12 @@ const hayEjemplos = productos.some(({ data }) => data.ejemplo);
 
 <script>
   const controls = document.querySelector<HTMLFormElement>(".catalog-controls");
-  const search = document.querySelector<HTMLInputElement>("#buscar-producto");
-  const category = document.querySelector<HTMLSelectElement>("#categoria-producto");
+  const search = document.querySelector<HTMLInputElement>("#product-search");
+  const category = document.querySelector<HTMLSelectElement>("#product-category");
   const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-product]"));
   const count = document.getElementById("catalog-count");
-  const empty = document.getElementById("sin-resultados");
-  const reset = document.getElementById("limpiar-filtros");
+  const empty = document.getElementById("no-results");
+  const reset = document.getElementById("clear-filters");
   const normalize = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("es");
 
   function filterProducts() {

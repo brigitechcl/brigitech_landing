@@ -1,0 +1,15 @@
+{
+  "name": "Gestión de inventario",
+  "summary": "Un solo lugar para organizar productos, registrar movimientos y tener una visión clara de tu stock.",
+  "category": "Gestión empresarial",
+  "features": [
+    "Control de stock",
+    "Registro de movimientos",
+    "Reportes de inventario"
+  ],
+  "backgroundImage": null,
+  "iconImage": null,
+  "order": 1,
+  "example": true,
+  "draft": true
+}

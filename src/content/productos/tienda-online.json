@@ -1,9 +1,0 @@
-{
-  "nombre": "Tienda online",
-  "resumen": "Una vitrina digital para presentar tu catálogo y conectar tus productos con nuevos clientes.",
-  "categoria": "Comercio digital",
-  "caracteristicas": ["Catálogo de productos", "Carrito de compras", "Gestión de pedidos"],
-  "icono": "bag",
-  "orden": 2,
-  "ejemplo": true
-}

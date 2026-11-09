@@ -2,27 +2,29 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
-const productos = defineCollection({
-  loader: glob({ pattern: "**/*.json", base: "./src/content/productos" }),
+const productImage = z.object({
+  src: z.string().regex(/^\/(?!\/)/, "Use a local public/ path, for example /products/image.webp"),
+  alt: z.string().trim().min(1),
+});
+
+const products = defineCollection({
+  loader: glob({ pattern: "**/*.json", base: "./src/content/products" }),
   schema: z.object({
-    nombre: z.string().trim().min(1),
-    resumen: z.string().trim().min(1),
-    categoria: z.string().trim().min(1),
-    caracteristicas: z.array(z.string().trim().min(1)).min(1).max(5),
-    icono: z.enum(["layers", "bag", "phone", "connect", "code", "support"]).default("layers"),
-    imagen: z.object({
-      src: z.string().regex(/^\/(?!\/)/, "Usa una ruta local desde public/, por ejemplo /productos/imagen.webp"),
-      alt: z.string().trim().min(1),
-    }).optional(),
-    enlace: z.string().refine(
+    name: z.string().trim().min(1),
+    summary: z.string().trim().min(1),
+    category: z.string().trim().min(1),
+    features: z.array(z.string().trim().min(1)).min(1).max(5),
+    backgroundImage: productImage.nullish(),
+    iconImage: productImage.nullish(),
+    link: z.string().refine(
       (value) => /^\/(?!\/)/.test(value) || URL.canParse(value) && ["https:", "http:"].includes(new URL(value).protocol),
-      "Usa una ruta interna o una URL http/https",
+      "Use an internal path or an HTTP/HTTPS URL",
     ).optional(),
-    estado: z.enum(["Disponible", "En desarrollo", "Próximamente"]).default("Próximamente"),
-    orden: z.number().int().nonnegative().default(100),
-    ejemplo: z.boolean().default(false),
-    borrador: z.boolean().default(false),
+    status: z.enum(["available", "in-development", "coming-soon"]).default("coming-soon"),
+    order: z.number().int().nonnegative().default(100),
+    example: z.boolean().default(false),
+    draft: z.boolean().default(false),
   }),
 });
 
-export const collections = { productos };
+export const collections = { products };

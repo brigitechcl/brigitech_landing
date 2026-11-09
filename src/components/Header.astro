@@ -4,28 +4,28 @@ import icono from "../assets/brigitech-icono-1024_alpha.png";
 import texto from "../assets/brigitech-texto-header.png";
 import Icon from "./Icon.astro";
 
-const inicio = Astro.url.pathname === "/" ? "" : "/";
-const enProductos = /^\/productos\/?$/.test(Astro.url.pathname);
-const enlaces = [
-  { texto: "Servicios", href: `${inicio}#servicios` },
-  { texto: "Productos", href: "/productos/", activo: enProductos },
-  { texto: "Soluciones", href: `${inicio}#rubros` },
-  { texto: "Cómo trabajamos", href: `${inicio}#proceso` },
-  { texto: "Preguntas", href: `${inicio}#preguntas` },
+const homePrefix = Astro.url.pathname === "/" ? "" : "/";
+const isProductsPage = /^\/products\/?$/.test(Astro.url.pathname);
+const links = [
+  { label: "Servicios", href: `${homePrefix}#servicios` },
+  { label: "Productos", href: "/products/", active: isProductsPage },
+  { label: "Soluciones", href: `${homePrefix}#rubros` },
+  { label: "Cómo trabajamos", href: `${homePrefix}#proceso` },
+  { label: "Preguntas", href: `${homePrefix}#preguntas` },
 ];
 ---
 <header class="site-header">
-  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+  <a href={isProductsPage ? "#content" : "#contenido"} class="skip-link">Saltar al contenido</a>
   <nav class="container header-inner" aria-label="Navegación principal">
     <a href="/" class="header-logo" aria-label="Brigitech, inicio">
       <span class="header-logo-symbol"><Image src={icono} alt="" width={128} loading="eager" /></span>
       <span class="header-logo-name"><Image src={texto} alt="" width={512} loading="eager" /></span>
     </a>
     <ul class="desktop-menu">
-      {enlaces.map((e) => <li><a href={e.href} aria-current={e.activo ? "page" : undefined}>{e.texto}</a></li>)}
+      {links.map((link) => <li><a href={link.href} aria-current={link.active ? "page" : undefined}>{link.label}</a></li>)}
     </ul>
     <div class="header-actions">
-      <a href={`${inicio}#contacto`} class="header-cta">Conversemos <Icon name="arrow-up" size={15} /></a>
+      <a href={`${homePrefix}#contacto`} class="header-cta">Conversemos <Icon name="arrow-up" size={15} /></a>
       <button id="boton-menu" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil" class="menu-toggle">
         <span class="menu-open-icon"><Icon name="menu" /></span>
         <span class="menu-close-icon"><Icon name="close" /></span>
@@ -33,7 +33,7 @@ const enlaces = [
     </div>
   </nav>
   <ul id="menu-movil" hidden class="mobile-menu container">
-    {enlaces.map((e) => <li><a href={e.href} aria-current={e.activo ? "page" : undefined}>{e.texto}<Icon name="arrow-up" size={16} /></a></li>)}
+    {links.map((link) => <li><a href={link.href} aria-current={link.active ? "page" : undefined}>{link.label}<Icon name="arrow-up" size={16} /></a></li>)}
   </ul>
 </header>
 

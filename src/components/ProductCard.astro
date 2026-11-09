@@ -3,40 +3,31 @@ import type { CollectionEntry } from "astro:content";
 import Icon from "./Icon.astro";
 
 interface Props {
-  producto: CollectionEntry<"productos">;
-  numero: number;
+  product: CollectionEntry<"products">;
 }
 
-const { producto: { id, data: producto }, numero } = Astro.props;
-const consulta = `mailto:brigitechcl@gmail.com?subject=${encodeURIComponent(`Consulta sobre ${producto.nombre}`)}`;
-const busqueda = [producto.nombre, producto.resumen, producto.categoria, ...producto.caracteristicas].join(" ");
+const { product: { id, data: product } } = Astro.props;
+const inquiryLink = `mailto:brigitechcl@gmail.com?subject=${encodeURIComponent(`Consulta sobre ${product.name}`)}`;
+const searchText = [product.name, product.summary, product.category, ...product.features].join(" ");
+const statusLabels = { available: "Disponible", "in-development": "En desarrollo", "coming-soon": "Próximamente" };
 ---
-<article class="product-card" data-product data-category={producto.categoria} data-search={busqueda} data-reveal aria-labelledby={`producto-${id}`}>
+<article class="product-card" data-product data-category={product.category} data-search={searchText} data-reveal aria-labelledby={`product-${id}`}>
   <div class="product-preview">
-    {producto.imagen ? (
-      <img src={producto.imagen.src} alt={producto.imagen.alt} width="720" height="400" loading="lazy" />
-    ) : (
-      <div class="product-art" aria-hidden="true">
-        <div class="art-grid"></div>
-        <span class="art-orbit"></span>
-        <span class="art-icon"><Icon name={producto.icono} size={44} /></span>
-        <span class="art-number">{String(numero).padStart(2, "0")}</span>
-        <span class="art-caption">BRIGITECH / PRODUCTOS</span>
-      </div>
-    )}
-    <span class:list={["product-status", { "is-available": !producto.ejemplo && producto.estado === "Disponible" }]}>
-      <span aria-hidden="true"></span>{producto.ejemplo ? "Producto de ejemplo" : producto.estado}
+    {product.backgroundImage && <img class="product-background" src={product.backgroundImage.src} alt={product.backgroundImage.alt} width="720" height="400" loading="lazy" />}
+    {product.iconImage && <img class="product-icon" src={product.iconImage.src} alt={product.iconImage.alt} width="64" height="64" loading="lazy" />}
+    <span class:list={["product-status", { "is-available": !product.example && product.status === "available" }]}>
+      <span aria-hidden="true"></span>{product.example ? "Producto de ejemplo" : statusLabels[product.status]}
     </span>
   </div>
   <div class="product-body">
-    <p class="product-category">{producto.categoria}</p>
-    <h2 id={`producto-${id}`}>{producto.nombre}</h2>
-    <p class="product-description">{producto.resumen}</p>
+    <p class="product-category">{product.category}</p>
+    <h2 id={`product-${id}`}>{product.name}</h2>
+    <p class="product-description">{product.summary}</p>
     <ul class="product-features" aria-label="Características">
-      {producto.caracteristicas.map((caracteristica) => <li><Icon name="check" size={15} />{caracteristica}</li>)}
+      {product.features.map((feature) => <li><Icon name="check" size={15} />{feature}</li>)}
     </ul>
-    <a class="product-link" href={producto.enlace ?? consulta} aria-label={`${producto.enlace ? "Conocer producto" : "Consultar producto"}: ${producto.nombre}`}>
-      {producto.enlace ? "Conocer producto" : "Consultar producto"}<Icon name="arrow-up" size={18} />
+    <a class="product-link" href={product.link ?? inquiryLink} aria-label={`${product.link ? "Conocer producto" : "Consultar producto"}: ${product.name}`}>
+      {product.link ? "Conocer producto" : "Consultar producto"}<Icon name="arrow-up" size={18} />
     </a>
   </div>
 </article>
@@ -44,16 +35,9 @@ const busqueda = [producto.nombre, producto.resumen, producto.categoria, ...prod
 <style>
   .product-card { min-width: 0; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: .75rem; background: #0b121c; transition: border-color .25s, transform .25s; }
   .product-card:hover { border-color: #168cff65; transform: translateY(-3px); }
-  .product-preview { position: relative; height: 200px; overflow: hidden; border-bottom: 1px solid var(--line); background: #0b1725; }
-  .product-preview > img { width: 100%; height: 100%; object-fit: cover; }
-  .product-art { position: relative; height: 100%; display: grid; place-items: center; isolation: isolate; background: radial-gradient(ellipse at 50% 80%, #168cff23, transparent 70%); }
-  .art-grid { position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(#168cff0b 1px, transparent 1px), linear-gradient(90deg, #168cff0b 1px, transparent 1px); background-size: 28px 28px; mask-image: linear-gradient(transparent, black); }
-  .art-orbit { position: absolute; width: 156px; height: 156px; border: 1px solid #168cff25; border-radius: 50%; }
-  .art-orbit::after { content: ""; position: absolute; width: 6px; height: 6px; top: 22px; right: 16px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 15px #31c7ef88; }
-  .art-icon { width: 90px; height: 90px; display: grid; place-items: center; color: #70c6ff; border: 1px solid #168cff45; border-radius: 1.2rem; background: linear-gradient(140deg, #173653, #0c1b2d); box-shadow: 0 12px 40px #00000030; transform: rotate(-8deg); transition: transform .35s; }
-  .product-card:hover .art-icon { transform: rotate(0deg) translateY(-3px); }
-  .art-number { position: absolute; right: 1.25rem; bottom: 1rem; color: #487092; font: .7rem monospace; }
-  .art-caption { position: absolute; left: 1.25rem; bottom: 1rem; color: #487092; font: .5rem monospace; letter-spacing: .12em; }
+  .product-preview { position: relative; height: 200px; overflow: hidden; }
+  .product-background { width: 100%; height: 100%; object-fit: cover; filter: brightness(.4) blur(1.5px); }
+  .product-icon { position: absolute; top: 50%; left: 50%; translate: -50% -50%; width: 64px; height: 64px; object-fit: contain; }
   .product-status { position: absolute; top: 1rem; left: 1rem; display: inline-flex; align-items: center; gap: .45rem; padding: .4rem .6rem; border: 1px solid #ffffff20; border-radius: .3rem; background: #08111ee8; color: #bdcce0; font-size: .63rem; backdrop-filter: blur(10px); }
   .product-status > span { width: 5px; height: 5px; border-radius: 50%; background: #8fa5be; }
   .is-available { color: #7be2ca; }

@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import texto from "../assets/brigitech-texto-header.png";
 import Icon from "./Icon.astro";
 const anio = new Date().getFullYear();
-const inicio = Astro.url.pathname === "/" ? "" : "/";
+const homePrefix = Astro.url.pathname === "/" ? "" : "/";
 ---
 <footer class="site-footer">
   <div class="container footer-top">
@@ -23,7 +23,7 @@ const inicio = Astro.url.pathname === "/" ? "" : "/";
         </a>
       </div>
     </div>
-    <nav aria-label="Enlaces del pie de página"><a href={`${inicio}#servicios`}>Servicios</a><a href="/productos/">Productos</a><a href={`${inicio}#proceso`}>Cómo trabajamos</a><a href={`${inicio}#preguntas`}>Preguntas frecuentes</a><a href={`${inicio}#contacto`}>Contacto <Icon name="arrow-up" size={14} /></a></nav>
+    <nav aria-label="Enlaces del pie de página"><a href={`${homePrefix}#servicios`}>Servicios</a><a href="/products/">Productos</a><a href={`${homePrefix}#proceso`}>Cómo trabajamos</a><a href={`${homePrefix}#preguntas`}>Preguntas frecuentes</a><a href={`${homePrefix}#contacto`}>Contacto <Icon name="arrow-up" size={14} /></a></nav>
     <div class="footer-contact">
       <span>HAGAMOS ALGO BUENO JUNTOS</span>
       <a class="footer-email" href="mailto:brigitechcl@gmail.com">brigitechcl@gmail.com <Icon name="arrow-up" size={14} /></a>
