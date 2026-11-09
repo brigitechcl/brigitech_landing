@@ -42,6 +42,10 @@ Filters and the counter update automatically. Categories come from published pro
 | `example` | Defaults to `false`. When `true`, displays «Producto de ejemplo» instead of the status and adds a notice to the catalog. |
 | `draft` | Defaults to `false`. When `true`, hides the product in both development and production. |
 | `link` | Optional existing internal route or HTTP/HTTPS URL for a product page, demo, or website. If omitted, the button opens an email with the product name in the subject. |
+| `version` | Optional non-empty version label, for example `v1.2.0`. |
+| `downloadUrl` | Optional local public path or HTTP/HTTPS URL for the product file. Displays a separate download button. |
+
+`version` and `downloadUrl` can be configured independently. For a local download, place the file in `public/` and use its public path (for example, `/products/installer.exe`). For a URL on another origin, configure its server to send `Content-Disposition: attachment`, since browsers may ignore the `download` attribute for cross-origin URLs.
 
 ## Background and icon images
 
