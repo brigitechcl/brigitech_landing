@@ -1,14 +1,14 @@
-# Adding products to the catalog
+# Añadir productos al catálogo
 
-The `/products/` page is generated from `src/content/products/`.
-Each product has its own JSON file; no page or card changes are required.
-Code identifiers, file names, and documentation use English. Customer-facing copy remains in Spanish.
-The previous `/productos/` URL redirects to `/products/`.
+La página `/products/` se genera a partir de `src/content/products/`.
+Cada producto tiene su propio archivo JSON; no es necesario modificar la página ni las tarjetas.
+Los identificadores del código y los nombres de archivo se mantienen en inglés. Esta documentación y los textos dirigidos a los clientes están en español.
+La URL anterior, `/productos/`, redirige a `/products/`.
 
-## Create a product
+## Crear un producto
 
-1. Create `src/content/products/product-name.json` with a unique file name.
-2. Copy this structure and replace the values:
+1. Crea `src/content/products/product-name.json` con un nombre de archivo único.
+2. Copia esta estructura y sustituye los valores:
 
 ```json
 {
@@ -25,28 +25,28 @@ The previous `/productos/` URL redirects to `/products/`.
 }
 ```
 
-3. Run `npm run build` to validate the content and generate the catalog. Redeploy the site to publish your changes.
+3. Ejecuta `npm run build` para validar el contenido y generar el catálogo. Vuelve a desplegar el sitio para publicar los cambios.
 
-Filters and the counter update automatically. Categories come from published products; use the same category text to group products together.
+Los filtros y el contador se actualizan automáticamente. Las categorías se obtienen de los productos publicados; utiliza el mismo texto de categoría para agrupar productos.
 
-## Fields
+## Campos
 
-| Field | Purpose |
+| Campo | Función |
 | --- | --- |
-| `name`, `summary`, `category` | Required, non-empty display text. |
-| `features` | Between 1 and 5 non-empty feature descriptions. |
-| `backgroundImage` | Optional image object with a local `src` and non-empty `alt`. Fills the preview area with `object-fit: cover`. Omit or set to `null` to leave it empty. |
-| `iconImage` | Optional image object with a local `src` and non-empty `alt`. Displayed centered at 64 × 64 pixels with `object-fit: contain`. Omit or set to `null` to leave it empty. |
-| `status` | `available`, `in-development`, or `coming-soon`. Defaults to `coming-soon`. Displayed as «Disponible», «En desarrollo», or «Próximamente». |
-| `order` | Non-negative integer; lower values appear first. Defaults to 100. Ties are sorted by name. |
-| `example` | Defaults to `false`. When `true`, displays «Producto de ejemplo» instead of the status and adds a notice to the catalog. |
-| `draft` | Defaults to `false`. When `true`, hides the product in both development and production. |
-| `link` | Optional existing internal route or HTTP/HTTPS URL for a product page, demo, or website. If omitted, the button opens an email with the product name in the subject. |
-| `version` | Optional non-empty version label, for example `v1.2.0`. |
-| `downloads` | Optional list of download objects. Each requires a descriptive `label` and a local public path or HTTP/HTTPS `url`. Each object displays a separate button. |
-| `downloadUrl` | Legacy single download URL. Used only when `downloads` is omitted; displays a generic «Descargar» button. |
+| `name`, `summary`, `category` | Textos visibles obligatorios que no pueden estar vacíos. |
+| `features` | Entre 1 y 5 descripciones de características, ninguna vacía. |
+| `backgroundImage` | Objeto de imagen opcional con un `src` local y un `alt` no vacío. Rellena el área de vista previa mediante `object-fit: cover`. Omítelo o usa `null` para dejarla vacía. |
+| `iconImage` | Objeto de imagen opcional con un `src` local y un `alt` no vacío. Se muestra centrado a 64 × 64 píxeles con `object-fit: contain`. Omítelo o usa `null` para dejarlo vacío. |
+| `status` | Acepta `available`, `in-development` o `coming-soon`. El valor predeterminado es `coming-soon`. Se muestra como «Disponible», «En desarrollo» o «Próximamente». |
+| `order` | Número entero no negativo; los valores menores aparecen primero. El valor predeterminado es 100. En caso de empate, se ordenan por nombre. |
+| `example` | El valor predeterminado es `false`. Si es `true`, muestra «Producto de ejemplo» en lugar del estado y añade un aviso al catálogo. |
+| `draft` | El valor predeterminado es `false`. Si es `true`, oculta el producto tanto en desarrollo como en producción. |
+| `link` | Ruta interna existente o URL HTTP/HTTPS opcional para una página de producto, demostración o sitio web. Si se omite, el botón abre un correo con el nombre del producto en el asunto. |
+| `version` | Etiqueta de versión opcional que no puede estar vacía, por ejemplo, `v1.2.0`. |
+| `downloads` | Lista opcional de objetos de descarga. Cada uno requiere un `label` descriptivo y una `url` con una ruta pública local o una URL HTTP/HTTPS. Cada objeto genera un botón independiente. |
+| `downloadUrl` | URL de descarga única del formato anterior. Solo se utiliza cuando se omite `downloads`; muestra un botón genérico «Descargar». |
 
-`version` and downloads can be configured independently. For example:
+`version` y las descargas se pueden configurar de forma independiente. Por ejemplo:
 
 ```json
 "downloads": [
@@ -56,11 +56,11 @@ Filters and the counter update automatically. Categories come from published pro
 ]
 ```
 
-Use labels that identify the platform, format or other relevant distinction. An empty or omitted list displays no download buttons (unless the legacy `downloadUrl` is present and the list is omitted). If both fields are present, `downloads` takes precedence. For a local download, place the file in `public/`. For a URL on another origin, configure its server to send `Content-Disposition: attachment`, since browsers may ignore the `download` attribute for cross-origin URLs.
+Utiliza etiquetas que identifiquen la plataforma, el formato u otra diferencia relevante. Si la lista está vacía o se omite, no se muestran botones de descarga (salvo si se omite la lista y está presente el campo anterior `downloadUrl`). Si ambos campos están presentes, `downloads` tiene prioridad. Para una descarga local, coloca el archivo en `public/`. Si la URL pertenece a otro origen, configura su servidor para enviar `Content-Disposition: attachment`, ya que los navegadores pueden ignorar el atributo `download` en las URL de otros orígenes.
 
-## Background and icon images
+## Imágenes de fondo e iconos
 
-Save your files in `public/products/` and reference them independently:
+Guarda los archivos en `public/products/` y referencia cada imagen por separado:
 
 ```json
 {
@@ -81,19 +81,19 @@ Save your files in `public/products/` and reference them independently:
 }
 ```
 
-You can provide only a background, only an icon, both, or neither. Missing images produce no image elements, placeholders, generated icons, gradients, patterns, or decorative effects. The preview keeps its layout space, and the rest of the card remains unchanged.
+Puedes incluir solo un fondo, solo un icono, ambos o ninguno. Las imágenes que faltan no generan elementos de imagen, marcadores de posición, iconos generados, degradados, patrones ni efectos decorativos. La vista previa conserva su espacio y el resto de la tarjeta no cambia.
 
-The catalog does not generate product detail pages automatically. Create an internal page before linking to it.
+El catálogo no genera automáticamente páginas de detalle de los productos. Crea una página interna antes de enlazarla.
 
-## Included examples
+## Ejemplos incluidos
 
-`inventory-management.json`, `online-store.json`, and `reservation-calendar.json` are illustrative samples, not real products. Replace their content or set `draft: true` to hide them. When publishing real products, set `example` to `false` and choose their status.
+`inventory-management.json`, `online-store.json` y `reservation-calendar.json` son ejemplos ilustrativos, no productos reales. Sustituye su contenido o establece `draft: true` para ocultarlos. Al publicar productos reales, establece `example` en `false` y elige su estado.
 
-## Technical structure
+## Estructura técnica
 
-- `src/content.config.ts`: Astro collection schema and data validation.
-- `src/content/products/`: individual product JSON files.
-- `src/components/ProductCard.astro`: reusable product card.
-- `src/pages/products.astro`: listing, accent-insensitive search, filters, and empty states.
+- `src/content.config.ts`: esquema de la colección de Astro y validación de datos.
+- `src/content/products/`: archivos JSON individuales de los productos.
+- `src/components/ProductCard.astro`: tarjeta de producto reutilizable.
+- `src/pages/products.astro`: listado, búsqueda que no distingue tildes, filtros y estados sin resultados.
 
-The list remains usable without JavaScript; interactive controls appear only when available. Animations respect the user's reduced-motion preference.
+El listado se puede utilizar sin JavaScript; los controles interactivos solo aparecen cuando están disponibles. Las animaciones respetan la preferencia del usuario de reducir el movimiento.
