@@ -10,8 +10,9 @@ const { product: { id, data: product } } = Astro.props;
 const inquiryLink = `mailto:brigitechcl@gmail.com?subject=${encodeURIComponent(`Consulta sobre ${product.name}`)}`;
 const searchText = [product.name, product.summary, product.category, ...product.features].join(" ");
 const statusLabels = { available: "Disponible", "in-development": "En desarrollo", "coming-soon": "Próximamente" };
+const downloads = product.downloads ?? (product.downloadUrl ? [{ label: "Descargar", url: product.downloadUrl }] : []);
 ---
-<article class="product-card" data-product data-category={product.category} data-search={searchText} data-reveal aria-labelledby={`product-${id}`}>
+<article id={`product-${id}`} class="product-card" data-product data-category={product.category} data-search={searchText} data-reveal aria-labelledby={`product-title-${id}`}>
   <div class="product-preview">
     {product.backgroundImage && <img class="product-background" src={product.backgroundImage.src} alt={product.backgroundImage.alt} width="720" height="400" loading="lazy" />}
     {product.iconImage && <img class="product-icon" src={product.iconImage.src} alt={product.iconImage.alt} width="64" height="64" loading="lazy" />}
@@ -21,7 +22,7 @@ const statusLabels = { available: "Disponible", "in-development": "En desarrollo
   </div>
   <div class="product-body">
     <p class="product-category">{product.category}</p>
-    <h2 id={`product-${id}`}>{product.name}</h2>
+    <h2 id={`product-title-${id}`}>{product.name}</h2>
     <p class="product-description">{product.summary}</p>
     <ul class="product-features" aria-label="Características">
       {product.features.map((feature) => <li><Icon name="check" size={15} />{feature}</li>)}
@@ -31,8 +32,9 @@ const statusLabels = { available: "Disponible", "in-development": "En desarrollo
       <!-- <a class="product-link" href={product.link ?? inquiryLink} aria-label={`${product.link ? "Conocer producto" : "Consultar producto"}: ${product.name}`}>
         {product.link ? "Conocer producto" : "Consultar producto"}<Icon name="arrow-up" size={18} />
       </a> -->
-      <span></span>
-      {product.downloadUrl && <a class="button button-primary" href={product.downloadUrl} download aria-label={`Descargar: ${product.name}`}>Descargar <Icon name="download" size={18} /></a>}
+      {downloads.length > 0 && <div class="product-downloads" role="group" aria-label={`Descargas de ${product.name}`}>
+        {downloads.map((download) => <a class="button button-primary" href={download.url} download aria-label={`${download.label}: ${product.name}`}>{download.label} <Icon name="download" size={18} /></a>)}
+      </div>}
     </div>
   </div>
 </article>
@@ -55,10 +57,12 @@ const statusLabels = { available: "Disponible", "in-development": "En desarrollo
   .product-features li { display: flex; align-items: start; gap: .6rem; font-size: .77rem; line-height: 1.5; color: #becbdb; }
   .product-features :global(svg) { color: #55b7ff; margin-top: .1rem; }
   .product-version { display: inline-flex; align-items: center; gap: .35rem; align-self: end; margin-top: auto; margin-bottom: .75rem; padding: .3rem .55rem; border: 1px solid color-mix(in srgb, var(--cyan) 25%, transparent); border-radius: .3rem; background: #08111ee8; color: var(--cyan); font-size: .64rem; letter-spacing: .1em; overflow-wrap: anywhere; }
-  .product-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; min-height: calc(3.3rem + 1.2rem + 1px); margin-top: auto; border-top: 1px solid var(--line); padding-top: 1.2rem; }
+  .product-actions { display: flex; flex-direction: column; align-items: stretch; gap: 1rem; min-height: calc(3.3rem + 1.2rem + 1px); margin-top: auto; border-top: 1px solid var(--line); padding-top: 1.2rem; }
   .product-version + .product-actions { margin-top: 0; }
   .product-actions .button { gap: 1rem; }
-  .product-link { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex: 1; color: #d2e5f7; font-size: .8rem; font-weight: 500; transition: color .2s; }
+  .product-downloads { display: grid; gap: .75rem; min-width: 0; }
+  .product-downloads .button { max-width: 100%; text-align: center; overflow-wrap: anywhere; }
+  .product-link { display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: #d2e5f7; font-size: .8rem; font-weight: 500; transition: color .2s; }
   .product-link:hover { color: var(--cyan); }
   @media (max-width: 639px) { .product-body { padding: 1.5rem; } }
 </style>

@@ -1,0 +1,154 @@
+---
+import { getCollection } from "astro:content";
+import Icon from "./Icon.astro";
+
+const products = (await getCollection("products", ({ data }) => !data.draft && !data.example))
+  .sort((a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name, "es"));
+---
+{products.length > 0 && (
+  <section class="featured-product" aria-labelledby="featured-product-title">
+    <div class="container">
+      <div class="section-heading">
+        <h2 id="featured-product-title" class="section-title">Productos destacados.</h2>
+        <p class="section-copy">Herramientas creadas por Brigitech para transformar tus ideas en resultados.</p>
+      </div>
+      <div class:list={["product-carousel", { "has-multiple": products.length > 1 }]} data-product-carousel role="region" aria-roledescription="carrusel" aria-label="Productos destacados">
+      <div class="featured-track" id="featured-product-track" data-carousel-track tabindex="0" aria-label="Desliza o usa las flechas para explorar los productos">
+      {products.map(({ id, data: product }, index) => (
+      <article class="featured-card" data-active={index === 0 ? "true" : "false"} role="group" aria-roledescription="diapositiva" aria-label={`${index + 1} de ${products.length}: ${product.name}`}>
+        {product.backgroundImage && <img class="mobile-product-background" src={product.backgroundImage.src} alt="" aria-hidden="true" width="1185" height="648" loading="lazy" decoding="async" />}
+        <div class="featured-copy">
+          <div class="product-identity">
+            {product.iconImage && <img src={product.iconImage.src} alt="" width="44" height="44" loading="lazy" />}
+            <h3>{product.name}</h3>
+          </div>
+          {/* <p class="featured-benefit">De tu imagen al próximo estampado.</p> */}
+          <p class="section-copy">{product.summary}</p>
+          <ul class="featured-features" aria-label="Características del producto">
+            {product.features.map((feature) => <li><Icon name="check" size={16} />{feature}</li>)}
+          </ul>
+          <div class="featured-actions">
+            <a href={`/products#product-${id}`} class="button button-primary">Conocer producto <Icon name="arrow" size={18} /></a>
+            <a href="/products" class="text-link">Ver catálogo <Icon name="arrow-up" size={16} /></a>
+          </div>
+        </div>
+        {product.backgroundImage && (
+          <figure class="featured-preview">
+            <div class="preview-bar" aria-hidden="true"><span></span><span></span><span></span><p>{product.name}</p></div>
+            <img src={product.backgroundImage.src} alt={`Vista de la aplicación ${product.name}`} width="1185" height="648" loading="lazy" decoding="async" />
+          </figure>
+        )}
+      </article>
+      ))}
+      </div>
+      {products.length > 1 && (
+        <div class="carousel-controls" data-carousel-controls hidden>
+          <button type="button" class="carousel-arrow carousel-previous" data-carousel-previous aria-label="Producto anterior" aria-controls="featured-product-track"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg></button>
+          <div class="carousel-dots" aria-label="Seleccionar producto">
+            {products.map(({ data: product }, index) => <button type="button" class="carousel-dot" data-carousel-dot aria-label={`Ver ${product.name}`} aria-controls="featured-product-track" aria-current={index === 0 ? "true" : undefined}><span></span></button>)}
+          </div>
+          <p class="carousel-status" data-carousel-status aria-live="polite" aria-atomic="true">1 / {products.length}</p>
+          <button type="button" class="carousel-arrow" data-carousel-next aria-label="Producto siguiente" aria-controls="featured-product-track"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg></button>
+        </div>
+      )}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .featured-product { padding-top: 5rem; }
+  .product-carousel { position: relative; padding: .75rem 0 .25rem; }
+  .featured-track { display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: .25rem 0; }
+  .featured-track::-webkit-scrollbar { display: none; }
+  .has-multiple .featured-track { padding-inline: 10%; scroll-padding-inline: 10%; mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
+  .featured-card { flex: 0 0 100%; min-width: 0; scroll-snap-align: center; display: grid; grid-template-columns: 1fr 1.2fr; align-items: center; gap: 2rem; padding: 2.5rem; border: 1px solid #168cff30; border-radius: .75rem; background: radial-gradient(ellipse at 100% 50%, #168cff12, transparent 65%), var(--surface); transition: opacity .25s; }
+  .featured-card[data-active="false"] { opacity: .3; }
+  .mobile-product-background { display: none; }
+  .carousel-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1rem; }
+  .carousel-arrow { position: absolute; z-index: 2; right: 0; top: .75rem; bottom: calc(44px + 1.25rem); display: grid; place-items: center; width: 10%; min-width: 36px; border: 0; background: transparent; color: var(--muted); transition: color .2s; }
+  .carousel-arrow:hover { color: var(--cyan); }
+  .carousel-previous :global(svg) { transform: rotate(180deg); }
+  .carousel-previous { left: 0; right: auto; }
+  .carousel-dots { display: flex; flex-wrap: wrap; justify-content: center; }
+  .carousel-dot { display: grid; place-items: center; width: 32px; height: 44px; padding: 0; border: 0; background: transparent; }
+  .carousel-dot span { width: 9px; height: 9px; border: 1px solid #6b839c; border-radius: 50%; background: transparent; transition: background .2s, border-color .2s, box-shadow .2s; }
+  .carousel-dot[aria-current="true"] span { background: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 0 4px #31c7ef12; }
+  .carousel-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .featured-copy { min-width: 0; }
+  .product-identity { display: flex; align-items: center; gap: .85rem; margin-top: 1.6rem; }
+  .product-identity img { flex-shrink: 0; object-fit: contain; }
+  h3 { font-size: clamp(1.5rem, 2.5vw, 2.1rem); font-weight: 600; letter-spacing: -.045em; line-height: 1.2; }
+  .featured-benefit { margin-top: 1.25rem; color: #d1e8fa; font-size: 1.1rem; line-height: 1.5; }
+  .featured-copy .section-copy { margin-top: .8rem; font-size: .9rem; }
+  .featured-features { display: grid; gap: .65rem; list-style: none; padding: 0; margin: 1.5rem 0 2rem; }
+  .featured-features li { display: flex; align-items: start; gap: .6rem; color: #becbdb; font-size: .8rem; line-height: 1.5; }
+  .featured-features :global(svg) { color: var(--cyan); margin-top: .1rem; }
+  .featured-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1.25rem; }
+  .featured-actions .button { gap: 1rem; }
+  .featured-preview { min-width: 0; margin: 0; overflow: hidden; border: 1px solid #5e9fc54a; border-radius: .65rem; background: #09131f; box-shadow: 0 25px 65px #0006; }
+  .preview-bar { display: flex; align-items: center; gap: .3rem; padding: .85rem 1rem; border-bottom: 1px solid var(--line); background: #101d2a; }
+  .preview-bar > span { width: 5px; height: 5px; border-radius: 50%; background: #496075; }
+  .preview-bar p { margin-left: .65rem; color: #91adc2; font-size: .62rem; }
+  .featured-preview > img { display: block; width: 100%; height: auto; }
+  figcaption { padding: 1rem; border-top: 1px solid var(--line); color: #91adc2; font-size: .7rem; text-align: center; }
+  @media (max-width: 1023px) { .featured-card { grid-template-columns: 1fr; gap: 2.5rem; padding: 2.5rem; }.featured-preview { width: 100%; max-width: 720px; margin-inline: auto; } }
+  @media (max-width: 767px) {
+    .featured-preview { display: none; }
+    .featured-card { position: relative; overflow: hidden; }
+    .mobile-product-background { display: block; position: absolute; top: 0; left: 0; width: 100%; height: auto; mask-image: linear-gradient(to bottom, #000 0%, #000 20%, transparent 100%); pointer-events: none; }
+    .featured-copy { position: relative; z-index: 1; }
+    .featured-card:has(.mobile-product-background) .featured-copy { padding-top: clamp(5rem, 20vw, 9rem); }
+  }
+  @media (max-width: 639px) { .featured-product { padding-top: 3rem; }.has-multiple .featured-track { padding-inline: 10%; scroll-padding-inline: 10%; }.featured-track { gap: .65rem; }.featured-card { padding: 1.25rem; gap: 2rem; }.featured-actions { align-items: stretch; flex-direction: column; }.featured-actions .text-link { justify-content: center; min-height: 2.75rem; } }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-product-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>("[data-carousel-track]");
+    const controls = carousel.querySelector<HTMLElement>("[data-carousel-controls]");
+    if (!track || !controls) return;
+
+    const slides = Array.from(track.querySelectorAll<HTMLElement>(".featured-card"));
+    const dots = Array.from(carousel.querySelectorAll<HTMLButtonElement>("[data-carousel-dot]"));
+    const status = carousel.querySelector<HTMLElement>("[data-carousel-status]");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let current = 0;
+
+    const goTo = (index: number) => {
+      const target = (index + slides.length) % slides.length;
+      track.scrollTo({
+        left: track.scrollLeft + slides[target].getBoundingClientRect().left + slides[target].offsetWidth / 2 - track.getBoundingClientRect().left - track.clientWidth / 2,
+        behavior: reducedMotion.matches ? "instant" : "smooth",
+      });
+    };
+
+    carousel.querySelector("[data-carousel-previous]")?.addEventListener("click", () => goTo(current - 1));
+    carousel.querySelector("[data-carousel-next]")?.addEventListener("click", () => goTo(current + 1));
+    dots.forEach((dot, index) => dot.addEventListener("click", () => goTo(index)));
+    track.addEventListener("keydown", (event) => {
+      if (event.target !== track) return;
+      if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+        event.preventDefault();
+        goTo(current + (event.key === "ArrowRight" ? 1 : -1));
+      }
+    });
+
+    const update = () => {
+      const center = track.getBoundingClientRect().left + track.clientWidth / 2;
+      const distance = (slide: HTMLElement) => Math.abs(slide.getBoundingClientRect().left + slide.offsetWidth / 2 - center);
+      current = slides.reduce((nearest, slide, index) =>
+        distance(slide) < distance(slides[nearest]) ? index : nearest, 0);
+      slides.forEach((slide, index) => { slide.dataset.active = String(index === current); });
+      dots.forEach((dot, index) => {
+        if (index === current) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
+      if (status) status.textContent = `${current + 1} / ${slides.length}`;
+    };
+    track.addEventListener("scroll", update, { passive: true });
+    new ResizeObserver(update).observe(track);
+    controls.hidden = false;
+    update();
+  });
+</script>

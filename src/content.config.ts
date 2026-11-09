@@ -7,6 +7,11 @@ const productImage = z.object({
   alt: z.string().trim().min(1),
 });
 
+const productUrl = z.string().refine(
+  (value) => /^\/(?!\/)/.test(value) || URL.canParse(value) && ["https:", "http:"].includes(new URL(value).protocol),
+  "Use an internal path or an HTTP/HTTPS URL",
+);
+
 const products = defineCollection({
   loader: glob({ pattern: "**/*.json", base: "./src/content/products" }),
   schema: z.object({
@@ -21,10 +26,11 @@ const products = defineCollection({
       "Use an internal path or an HTTP/HTTPS URL",
     ).optional(),
     version: z.string().trim().min(1).optional(),
-    downloadUrl: z.string().refine(
-      (value) => /^\/(?!\/)/.test(value) || URL.canParse(value) && ["https:", "http:"].includes(new URL(value).protocol),
-      "Use an internal path or an HTTP/HTTPS URL",
-    ).optional(),
+    downloadUrl: productUrl.optional(),
+    downloads: z.array(z.object({
+      label: z.string().trim().min(1),
+      url: productUrl,
+    })).optional(),
     status: z.enum(["available", "in-development", "coming-soon"]).default("coming-soon"),
     order: z.number().int().nonnegative().default(100),
     example: z.boolean().default(false),

@@ -9,7 +9,7 @@
   ],
   "backgroundImage": {
     "src": "/products/brigitech-semitonos/brigitech-semitonos-bg.png",
-    "alt": "Brigitech Semitonos Icono"
+    "alt": "Brigitech Semitonos Background"
   },
   "iconImage": {
     "src": "/products/brigitech-semitonos/brigitech-semitonos-icon.png",
@@ -17,6 +17,12 @@
   },
   "link": "https://pub-7eb9dd1c6b6c4691953ef948fa056a20.r2.dev/Semitonos-Instalador-x64.exe",
   "version": "v1.0.1",
-  "downloadUrl": "https://pub-7eb9dd1c6b6c4691953ef948fa056a20.r2.dev/Semitonos-Instalador-x64.exe",
-  "status": "available"
+  "downloads": [
+    {
+      "label": "Descargar Windows x64 (.exe)",
+      "url": "https://pub-7eb9dd1c6b6c4691953ef948fa056a20.r2.dev/Semitonos-Instalador-x64.exe"
+    }
+  ],
+  "status": "available",
+  "order": 1
 }

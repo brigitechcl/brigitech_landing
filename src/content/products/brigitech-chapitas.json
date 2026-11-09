@@ -1,0 +1,19 @@
+{
+  "name": "Brigitech Chapitas",
+  "summary": "Aplicación de escritorio para preparar diseños de chapitas para impresión y corte, con selección de tamaños y organización de imágenes.",
+  "category": "Diseño",
+  "features": [
+    "Selección del tamaño de la chapita",
+    "Ajuste de escala y posición de imágenes",
+    "Exportación de diseños en PNG o SVG"
+  ],
+  "backgroundImage": {
+    "src": "/products/brigitech-chapitas/brigitech-chapitas-bg.png",
+    "alt": "Brigitech Chapitas Background"
+  },
+  "iconImage": {
+    "src": "/products/brigitech-chapitas/brigitech-chapitas-icon.png",
+    "alt": "Brigitech Chapitas Icono"
+  },
+  "status": "in-development"
+}

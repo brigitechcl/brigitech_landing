@@ -43,9 +43,20 @@ Filters and the counter update automatically. Categories come from published pro
 | `draft` | Defaults to `false`. When `true`, hides the product in both development and production. |
 | `link` | Optional existing internal route or HTTP/HTTPS URL for a product page, demo, or website. If omitted, the button opens an email with the product name in the subject. |
 | `version` | Optional non-empty version label, for example `v1.2.0`. |
-| `downloadUrl` | Optional local public path or HTTP/HTTPS URL for the product file. Displays a separate download button. |
+| `downloads` | Optional list of download objects. Each requires a descriptive `label` and a local public path or HTTP/HTTPS `url`. Each object displays a separate button. |
+| `downloadUrl` | Legacy single download URL. Used only when `downloads` is omitted; displays a generic «Descargar» button. |
 
-`version` and `downloadUrl` can be configured independently. For a local download, place the file in `public/` and use its public path (for example, `/products/installer.exe`). For a URL on another origin, configure its server to send `Content-Disposition: attachment`, since browsers may ignore the `download` attribute for cross-origin URLs.
+`version` and downloads can be configured independently. For example:
+
+```json
+"downloads": [
+  { "label": "Descargar Windows (.exe)", "url": "/products/installer.exe" },
+  { "label": "Descargar macOS (.dmg)", "url": "/products/installer.dmg" },
+  { "label": "Descargar versión portable (.zip)", "url": "/products/portable.zip" }
+]
+```
+
+Use labels that identify the platform, format or other relevant distinction. An empty or omitted list displays no download buttons (unless the legacy `downloadUrl` is present and the list is omitted). If both fields are present, `downloads` takes precedence. For a local download, place the file in `public/`. For a URL on another origin, configure its server to send `Content-Disposition: attachment`, since browsers may ignore the `download` attribute for cross-origin URLs.
 
 ## Background and icon images
 
