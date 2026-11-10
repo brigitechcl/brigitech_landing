@@ -19,8 +19,12 @@
   "version": "v1.0.1",
   "downloads": [
     {
-      "label": "Descargar Windows x64 (.exe)",
+      "label": "Windows x64 instalador (.exe)",
       "url": "https://pub-7eb9dd1c6b6c4691953ef948fa056a20.r2.dev/Semitonos-Instalador-x64.exe"
+    },
+    {
+      "label": "Windows x64 portable (.exe)",
+      "url": "https://pub-7eb9dd1c6b6c4691953ef948fa056a20.r2.dev/Semitonos-Portable-x64.exe"
     }
   ],
   "status": "available",
