@@ -28,5 +28,6 @@
     }
   ],
   "status": "available",
-  "order": 1
+  "order": 1,
+  "requiresLicense": true
 }

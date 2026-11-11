@@ -21,7 +21,10 @@ const downloads = product.downloads ?? (product.downloadUrl ? [{ label: "Descarg
     </span>
   </div>
   <div class="product-body">
-    <p class="product-category">{product.category}</p>
+    <div class="product-meta">
+      <p class="product-category">{product.category}</p>
+      {product.requiresLicense && <span class="product-license"><Icon name="lock" size={13} />Licencia de pago</span>}
+    </div>
     <h2 id={`product-title-${id}`}>{product.name}</h2>
     <p class="product-description">{product.summary}</p>
     <ul class="product-features" aria-label="Características">
@@ -35,6 +38,7 @@ const downloads = product.downloads ?? (product.downloadUrl ? [{ label: "Descarg
       {downloads.length > 0 && <div class="product-downloads" role="group" aria-label={`Descargas de ${product.name}`}>
         {downloads.map((download) => <a class="button button-primary" href={download.url} download aria-label={`${download.label}: ${product.name}`}>{download.label} <Icon name="download" size={18} /></a>)}
       </div>}
+      {product.requiresLicense && <div class="product-license-notice"><Icon name="info" size={16} /><p>Este producto requiere una licencia para su uso. Obtén tu licencia <a href="/#contacto">aquí</a>.</p></div>}
     </div>
   </div>
 </article>
@@ -50,13 +54,16 @@ const downloads = product.downloads ?? (product.downloadUrl ? [{ label: "Descarg
   .is-available { color: #7be2ca; }
   .is-available > span { background: #7be2ca; }
   .product-body { display: flex; flex: 1; flex-direction: column; padding: 1.75rem; }
-  .product-category { color: var(--cyan); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; }
+  .product-meta { display: flex; align-items: center; justify-content: space-between; gap: .5rem; min-height: 2rem; }
+  .product-category { min-width: 0; color: var(--cyan); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; overflow-wrap: anywhere; }
   h2 { margin-top: .75rem; font-size: 1.5rem; font-weight: 500; letter-spacing: -.04em; line-height: 1.25; overflow-wrap: anywhere; }
   .product-description { margin-top: .85rem; color: var(--muted); font-size: .875rem; line-height: 1.8; }
   .product-features { display: grid; gap: .65rem; list-style: none; padding: 0; margin: 1.5rem 0 1.75rem; }
   .product-features li { display: flex; align-items: start; gap: .6rem; font-size: .77rem; line-height: 1.5; color: #becbdb; }
   .product-features :global(svg) { color: #55b7ff; margin-top: .1rem; }
-  .product-version { display: inline-flex; align-items: center; gap: .35rem; align-self: end; margin-top: auto; margin-bottom: .75rem; padding: .3rem .55rem; border: 1px solid color-mix(in srgb, var(--cyan) 25%, transparent); border-radius: .3rem; background: #08111ee8; color: var(--cyan); font-size: .64rem; letter-spacing: .1em; overflow-wrap: anywhere; }
+  .product-version, .product-license { display: inline-flex; align-items: center; gap: .35rem; padding: .3rem .55rem; border: 1px solid color-mix(in srgb, var(--cyan) 25%, transparent); border-radius: .3rem; background: #08111ee8; color: var(--cyan); font-size: .64rem; letter-spacing: .1em; }
+  .product-version { align-self: end; margin-top: auto; margin-bottom: .75rem; overflow-wrap: anywhere; }
+  .product-license { flex-shrink: 0; border-radius: 999px; letter-spacing: normal; }
   .product-actions { display: flex; flex-direction: column; align-items: stretch; gap: 1rem; min-height: calc(3.3rem + 1.2rem + 1px); margin-top: auto; border-top: 1px solid var(--line); padding-top: 1.2rem; }
   .product-version + .product-actions { margin-top: 0; }
   .product-actions .button { gap: 1rem; }
@@ -64,5 +71,8 @@ const downloads = product.downloads ?? (product.downloadUrl ? [{ label: "Descarg
   .product-downloads .button { max-width: 100%; text-align: center; overflow-wrap: anywhere; }
   .product-link { display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: #d2e5f7; font-size: .8rem; font-weight: 500; transition: color .2s; }
   .product-link:hover { color: var(--cyan); }
+  .product-license-notice { display: flex; align-items: start; gap: .6rem; color: var(--muted); font-size: .75rem; line-height: 1.6; }
+  .product-license-notice :global(svg) { flex-shrink: 0; margin-top: .15rem; color: var(--cyan); }
+  .product-license-notice a { color: var(--cyan); text-decoration: underline; text-underline-offset: .15em; }
   @media (max-width: 639px) { .product-body { padding: 1.5rem; } }
 </style>

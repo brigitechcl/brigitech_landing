@@ -43,6 +43,7 @@ Los filtros y el contador se actualizan automáticamente. Las categorías se obt
 | `draft` | El valor predeterminado es `false`. Si es `true`, oculta el producto tanto en desarrollo como en producción. |
 | `link` | Ruta interna existente o URL HTTP/HTTPS opcional para una página de producto, demostración o sitio web. Si se omite, el botón abre un correo con el nombre del producto en el asunto. |
 | `version` | Etiqueta de versión opcional que no puede estar vacía, por ejemplo, `v1.2.0`. |
+| `requiresLicense` | Booleano opcional, `false` por defecto. Si es `true`, muestra el badge «Licencia de pago» y el aviso con enlace a contacto. |
 | `downloads` | Lista opcional de objetos de descarga. Cada uno requiere un `label` descriptivo y una `url` con una ruta pública local o una URL HTTP/HTTPS. Cada objeto genera un botón independiente. |
 | `downloadUrl` | URL de descarga única del formato anterior. Solo se utiliza cuando se omite `downloads`; muestra un botón genérico «Descargar». |
 

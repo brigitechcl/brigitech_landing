@@ -26,6 +26,7 @@ const products = defineCollection({
       "Use an internal path or an HTTP/HTTPS URL",
     ).optional(),
     version: z.string().trim().min(1).optional(),
+    requiresLicense: z.boolean().default(false),
     downloadUrl: productUrl.optional(),
     downloads: z.array(z.object({
       label: z.string().trim().min(1),

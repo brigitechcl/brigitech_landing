@@ -27,6 +27,10 @@ const hasExamples = products.some(({ data }) => data.example);
       </header>
 
       <section class="catalog" aria-label="Catálogo de productos">
+        <p class="license-note">
+          <span class="license-note-icon"><Icon name="warning" size={16} /></span>
+          <span>Algunos de estos programas requieren una licencia para su uso.</span>
+        </p>
         <form class="catalog-controls" role="search" aria-label="Buscar productos" hidden>
           <div class="search-field">
             <label for="product-search">Buscar producto</label>
@@ -82,6 +86,8 @@ const hasExamples = products.some(({ data }) => data.example);
   .catalog-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-block: 1.75rem 1.25rem; color: #bac9dc; font-size: .75rem; }
   .catalog-meta > span { color: #6f849e; font-size: .68rem; }
   .examples-note { padding: .8rem 1rem; margin-bottom: 1.25rem; border-left: 2px solid #168cff60; background: #168cff08; color: #9bacc1; font-size: .75rem; line-height: 1.7; }
+  .license-note { display: flex; align-items: flex-start; gap: .55rem; margin-bottom: 1.25rem; padding: .65rem .85rem; border: 1px solid #e5b86a20; border-radius: .4rem; background: #e5b86a08; color: #b8b2a6; font-size: .875rem; line-height: 1.6; }
+  .license-note-icon { display: flex; flex-shrink: 0; margin-top: .1rem; color: #d8ad65; }
   .products-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
   .empty-state { display: grid; justify-items: center; text-align: center; padding: 4rem 1.5rem; border: 1px dashed #ffffff20; border-radius: .75rem; }
   .empty-icon { display: grid; place-items: center; width: 60px; height: 60px; margin-bottom: 1.5rem; color: #70c6ff; background: #168cff12; border: 1px solid #168cff30; border-radius: .75rem; }
