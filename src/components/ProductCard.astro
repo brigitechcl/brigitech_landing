@@ -38,7 +38,7 @@ const downloads = product.downloads ?? (product.downloadUrl ? [{ label: "Descarg
       {downloads.length > 0 && <div class="product-downloads" role="group" aria-label={`Descargas de ${product.name}`}>
         {downloads.map((download) => <a class="button button-primary" href={download.url} download aria-label={`${download.label}: ${product.name}`}>{download.label} <Icon name="download" size={18} /></a>)}
       </div>}
-      {product.requiresLicense && <div class="product-license-notice"><Icon name="info" size={16} /><p>Este producto requiere una licencia para su uso. Obtén tu licencia <a href="/#contacto">aquí</a>.</p></div>}
+      {product.requiresLicense && <div class="product-license-notice"><Icon name="info" size={16} /><p>Este producto requiere una licencia para su uso. Solicita tu licencia <a href="/#contacto">aquí</a>.</p></div>}
     </div>
   </div>
 </article>
