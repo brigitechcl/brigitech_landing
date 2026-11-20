@@ -1,11 +1,11 @@
 {
   "name": "Brigitech Tarjetas",
-  "summary": "Aplicación de escritorio para diseñar y preparar chapitas personalizadas, ajustando imágenes a distintos tamaños y organizando los diseños para su impresión y corte.",
+  "summary": "Aplicación de escritorio para diseñar y preparar tarjetas personalizadas, con herramientas para organizar, ajustar y exportar diseños listos para impresión.",
   "category": "Diseño",
   "features": [
-    "Selección de tamaños de chapitas",
-    "Ajuste de escala y posición de imágenes",
-    "Organización de diseños para impresión"
+    "Diseño de tarjetas personalizadas",
+    "Selección de tamaños y formatos",
+    "Ajuste de escala y posición de imágenes"
   ],
   "backgroundImage": {
     "src": "/products/brigitech-tarjetas/brigitech-tarjetas-bg.png",
