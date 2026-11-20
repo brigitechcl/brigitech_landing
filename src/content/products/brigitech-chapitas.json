@@ -15,5 +15,19 @@
     "src": "/products/brigitech-chapitas/brigitech-chapitas-icon.png",
     "alt": "Brigitech Chapitas Icono"
   },
-  "status": "in-development"
+  "link": "https://pub-7eb9dd1c6b6c4691953ef948fa056a20.r2.dev/Chapitas-Instalador-x64.exe",
+  "version": "v1.2.0",
+  "downloads": [
+    {
+      "label": "Windows x64 instalador (.exe)",
+      "url": "https://pub-7eb9dd1c6b6c4691953ef948fa056a20.r2.dev/Chapitas-Instalador-x64.exe"
+    },
+    {
+      "label": "Windows x64 portable (.exe)",
+      "url": "https://pub-7eb9dd1c6b6c4691953ef948fa056a20.r2.dev/Chapitas-Portable-x64.exe"
+    }
+  ],
+  "status": "available",
+  "order": 2,
+  "requiresLicense": true
 }
